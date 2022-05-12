@@ -1,0 +1,115 @@
+{% extends 'registration/base.html' %}
+<style>
+    .bootstrap-select .btn{
+        display: none;
+    }
+</style>
+{% block content %}
+
+<div class="authincation h-100" style="background-color: #7971ea;">
+    <div class="container h-100">
+        <div class="row justify-content-center h-100 align-items-center">
+            <div class="col-md-6">
+                <div class="authincation-content" >
+                    <div class="row no-gutters">
+                        <div class="col-xl-12">
+                            <div class="auth-form">
+                                <div class="card" style="width: 40rem; box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;">
+                                    <div class="card-body" style="margin: 40px 30px;">
+                                <h4 class="text-center mb-4"  >Тіркелу</h4>
+                                
+                                <form action="" method="POST" class="form-group">
+
+									{% csrf_token %}
+                                    {% load widget_tweaks%}
+
+                                    <div class="form-group">
+                                        
+                                        <label><strong>Қатысушы есіміңіз:</strong></label>
+                                        
+                                        <div class="form-group" style="width: 33rem;">{{form.username}}</div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label><strong>Құпия сөз: </strong></label>
+                                        <div  class="form-group" style="width: 33rem;">{{form.password1}}</div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label><strong>Құпия сөзді құптаңыз: </strong></label>
+                                        <div class="form-group" style="width: 33rem;">{{form.password2}}</div>
+                                    </div>
+                                   <!-- <div class="form-group">
+                                        <label><strong>Тегіңіз:</strong></label>
+                                        {{ registration_form.first_name|add_class:"form-control" }}
+                                    </div> -->
+                                    <div class="form-group mt-3">
+                                        <label><strong>Эл. адрес:</strong></label>
+                                        <div class="form-group" style="width: 33rem;">{{form.email}}
+                                    </div></div>
+                                    <!-- <div class="form-group">
+                                        <label><strong>Фото:</strong></label>
+                                        {{ profile_form.photo|add_class:"form-control" }}
+                                    </div> -->
+                                    <div>{{form.errors}}</div>
+                                    <div class="text-center mt-3">
+                                        <input type="submit"   class="btn w-100 btn-primary btn-block" style="background-color: #7971ea; border: none;" value="Тіркеліңіз">
+                                    </div>
+                                </form>
+                                <div class="new-account mt-3">
+                                    <p> <a class="text" style="color: black;" href="{% url 'universystem:login' %}">Логинмен кіру</a></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> 
+<script>
+    /* Because i didnt set placeholder values in forms.py they will be set here using vanilla Javascript
+//We start indexing at one because CSRF_token is considered and input field 
+*/
+
+//Query All input fields
+var form_fields = document.getElementsByTagName('input')
+form_fields[1].placeholder='';
+form_fields[2].placeholder='';
+form_fields[3].placeholder='';
+form_fields[4].placeholder='';
+
+
+for (var field in form_fields){	
+form_fields[field].className += ' form-control'
+}
+</script>
+
+<style>
+    label{
+        padding: 10px 0;
+    }
+
+    a:link {
+  color: black  ;
+  background-color: transparent;
+  text-decoration: none;
+  text-decoration: underline;
+}
+a:visited {
+  color: black;
+  background-color: transparent;
+  text-decoration: none;
+}
+a:hover {
+    font-weight: bold;
+  background-color: transparent;
+  text-decoration: underline;
+}
+a:active {
+  color: red;
+  background-color: transparent;
+  text-decoration: underline;
+}
+</style>
+{% endblock %}

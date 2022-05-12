@@ -1,0 +1,109 @@
+{% extends 'base.html' %}
+
+
+{% load static %}
+
+<link rel="stylesheet" href="{% static 'assets/css/Account-setting-or-edit-profile.css' %}">
+{% block content %}
+ {% if user.is_authenticated %}
+ <style>
+    a:link {
+    color: #7971ea;
+    text-decoration: none;
+    }
+    
+    /* visited link */
+    a:visited {
+    color: #7971ea;
+    }
+    
+    /* mouse over link */
+    a:hover {
+    color: black;
+    }
+    
+    /* selected link */
+    a:active {
+    color: black;
+    }
+    a.course{
+    color: #7971ea;
+    }
+    .btn.btn-primary{
+        color: white;
+        background-color: #7971ea;
+    }
+    .user-avatar{
+        border-radius: 50%;
+        width: 200px;
+        height: 120px;
+        margin-left: 2rem;
+    }
+    img{
+        border-radius: 50%;
+        width: 100%;
+        height: auto;
+    }
+    .user-name{
+        margin-top: 6rem;
+    }
+    .about{
+        margin-top: 1rem;
+    }
+    </style>
+ <div class="container">
+    <ol class="breadcrumb" style="background-color: white; font-size: 18px; margin-top: 4rem;">
+        <li class="breadcrumb-item active" aria-current="page"><a href="{% url 'universystem:topics' %}" >Курс</a></li>
+       <li class="breadcrumb-item"><a href="{% url 'universystem:profile' %}" >Жеке кабинет</a></li>
+       <li class="breadcrumb-item"><a href="#" >Аккаунт баптаулары  </a></li>
+
+   
+   </ol>
+   <div class="container">
+    <div class="row gutters">
+    <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
+    <div class="card h-100">
+        <div class="card-body">
+            <div class="account-settings">
+                <div class="user-profile">
+                    <div class="user-avatar">
+                        <img src="{{user.profile.photo.url}}" alt="admin">
+                    </div>
+                    <h5 class="user-name">Логин: {{ user.username }}</h5>
+                    <h6 class="user-email">Эл.пошта: {{ user.email }}</h6>
+                </div>
+                <div class="about">
+                    <h5>Регистрация күні:</h5>
+                    <p>{{user.date_joined}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12">
+    <div class="card h-100">
+        <div class="card-body">
+            
+            <form action="" method="post">
+                {% csrf_token %}
+                <fieldset class="form-group">
+                    {{u_form}}
+                </fieldset>
+                <div class="form-group">
+                    <button type="submit"></button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+    </div>
+    </div>
+    </div>
+ {% else %}
+  <p>login to view</p>
+
+  {% endif %}
+
+{% endblock %}  
+
+
