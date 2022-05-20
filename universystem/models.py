@@ -2,8 +2,8 @@ from datetime import date
 from email.policy import default
 from email.quoprimime import body_check
 from re import T
-from tabnanny import verbose
-from turtle import title
+
+
 from django.db import models
 # from tinymce import HTMLField
 from django.contrib.auth.models import User
