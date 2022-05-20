@@ -38,7 +38,6 @@ CKEDITOR_UPLOAD_PATH = 'uploads/'
 INSTALLED_APPS = [
     'django.contrib.admin',
     'widget_tweaks',
-    'tinymce',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
