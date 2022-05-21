@@ -8,6 +8,10 @@ app_name = 'universystem'
 urlpatterns =[
 	path('', views.homepage, name="home"),
 	path('register/',views.register,name='register'),
+	path('register/success',views.success,name='success'),
+	path('register/token',views.token_send,name='token_send'),
+	path('register/verify/<auth_token>',views.verify,name='verify'),
+	path('register/error',views.error,name='error'),
 	path('login/',auth_views.LoginView.as_view(),name='login'),
 	path('logout/',auth_views.LogoutView.as_view(),name='logout'),
 	path('profile/',views.view_profile, name='profile'),
@@ -27,10 +31,8 @@ urlpatterns =[
 	
 	
 
-	path('user/registration', views.UserRegistrationView.as_view(), name='user_registration_page'),
-	path('lessons/<int:id>',views.LessonsDetailView.as_view(), name='LessonsDetailView'),
-	path('addEroll/<int:id>',views.AddEnrlcourseView.as_view(), name='AddEnrlcourseView'),
-	path('add/',views.AddIndexView.as_view(), name='AddIndexView'),
+
+
 ]
 
 if settings.DEBUG:

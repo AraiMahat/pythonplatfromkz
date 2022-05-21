@@ -22,10 +22,38 @@
 
 									{% csrf_token %}
                                     {% load widget_tweaks%}
-
-                                    <div class="form-group">
+                                    {% if messages %}
+                                        {% for message in messages %}   
+                                        <div class="alert alert-info">
+                                            {{message}}
+                                        </div>
+                                        {% endfor %}
+                                    {% endif %}
+                                        <div class="form-group mt-3">
+                                            <label><strong>Логин:</strong></label>
+                                            <input type="text" name="username" placeholder="Username..." class="form-control">
+                                        </div>
+                                        <div class="form-group mt-3">
+                                            <label><strong>Құпия сөз:</strong></label>
+                                            <input type="password" name="password1" placeholder="Password..." class="form-control" >
+                                        </div>
+                                        <div class="form-group mt-3">
+                                            <label><strong>Құпия сөзді құптаңыз:</strong></label>
+                                            <input type="password" name="password2" placeholder="Password..." class="form-control" >
+                                        </div>
+                                        <div class="form-group mt-3">
+                                            <label><strong>Эл. пошта:</strong></label>
+                                            <input type="email" name="email" placeholder="Email..." class="form-control" >
+                                        </div>
+                                       
+                                        <div class="mt-3 text-center">
+                                            
+                                            <input type="submit"   class="w-100 btn btn-primary btn-block" style="background-color: #7971ea; border: none;" value="Кіру">
+                                        </div>
+                                  
+                                    <!-- <div class="form-group">
                                         
-                                        <label><strong>Қатысушы есіміңіз:</strong></label>
+                                        <label><strong>Логин:</strong></label>
                                         
                                         <div class="form-group" style="width: 33rem;">{{form.username}}</div>
                                     </div>
@@ -37,25 +65,19 @@
                                         <label><strong>Құпия сөзді құптаңыз: </strong></label>
                                         <div class="form-group" style="width: 33rem;">{{form.password2}}</div>
                                     </div>
-                                   <!-- <div class="form-group">
-                                        <label><strong>Тегіңіз:</strong></label>
-                                        {{ registration_form.first_name|add_class:"form-control" }}
-                                    </div> -->
+                                   
                                     <div class="form-group mt-3">
-                                        <label><strong>Эл. адрес:</strong></label>
+                                        <label><strong>Эл. пошта:</strong></label>
                                         <div class="form-group" style="width: 33rem;">{{form.email}}
                                     </div></div>
-                                    <!-- <div class="form-group">
-                                        <label><strong>Фото:</strong></label>
-                                        {{ profile_form.photo|add_class:"form-control" }}
-                                    </div> -->
+                                    
                                     <div>{{form.errors}}</div>
                                     <div class="text-center mt-3">
                                         <input type="submit"   class="btn w-100 btn-primary btn-block" style="background-color: #7971ea; border: none;" value="Тіркеліңіз">
-                                    </div>
+                                    </div> -->
                                 </form>
                                 <div class="new-account mt-3">
-                                    <p> <a class="text" style="color: black;" href="{% url 'universystem:login' %}">Логинмен кіру</a></p>
+                                    <p> <a class="text" style="color: black;" href="{% url 'universystem:login' %}">Кіру</a></p>
                                 </div>
                             </div>
                         </div>

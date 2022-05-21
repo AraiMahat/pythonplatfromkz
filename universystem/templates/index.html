@@ -9,7 +9,7 @@
     
     
     <link href="https://fonts.googleapis.com/css?family=Muli:300,400,700,900" rel="stylesheet">
-    <link rel="stylesheet" href="fonts/icomoon/style.css' %}{% static '">
+    <link rel="stylesheet" href="{% static 'fonts/icomoon/style.css' %}">
 
     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
     <link rel="stylesheet" href="{% static 'css/jquery-ui.css' %}">
@@ -62,7 +62,7 @@
           <div class="ml-auto w-25">
             <nav class="site-navigation position-relative text-right" role="navigation">
               <ul class="site-menu main-menu site-menu-dark js-clone-nav mr-auto d-none d-lg-block m-0 p-0">
-                <li class="cta"><a href="{% url 'universystem:login' %}" class="login"><span>Кіру</span></a></li>
+                <li class="cta"><a href="{% url 'universystem:register' %}" class="register"><span>Тіркелу</span></a></li>
               </ul>
             </nav>
             <a href="#" class="d-inline-block d-lg-none site-menu-toggle js-menu-toggle text-black float-right"><span class="icon-menu h3"></span></a>
@@ -112,16 +112,22 @@
                           <input type="submit"   class="w-100 btn btn-primary btn-block" style="background-color: #7971ea; border: none;" value="Кіру">
                                             
                     </div> -->
-                <a href="{% url 'universystem:login' %}" class="btn btn-primary" style="border-radius: 50px;"><span>Кіру</span></a>
+                    {% if request.GET.next %}
+                        <input type="hidden" name="next" value="{{ request.GET.next }}">
+                    {% endif %}
+                    <input type="submit"   class="w-100 btn btn-primary btn-block" style="background-color: #7971ea; border: none;" value="Кіру">
+                    <!-- <a href="{% url 'universystem:login' %}" class="btn btn-primary" style="border-radius: 50px;"><span>Кіру</span></a> -->
 
-                   <div class="new-account mt-3">
+                   <!-- <div class="new-account mt-3">
                         <p> <a class="text-primary" style="font-size: 18px; font:bold;" href="{% url 'universystem:register' %}">
                             Тіркелу</a></p>
-                    </div>
+                    </div> -->
+                    
                   </form>
                    
 
                 </div>
+                <!--  -->
               </div>
             </div>
             
@@ -599,30 +605,29 @@
             <h2 class="section-title mb-3">Пікір қалдыру</h2>
             <!-- <p class="mb-5">Natus totam voluptatibus animi aspernatur ducimus quas obcaecati mollitia quibusdam temporibus culpa dolore molestias blanditiis consequuntur sunt nisi.</p> -->
           
-            <form method="post" data-aos="fade">
+            <form method="post" >
+              {% csrf_token %}
               <div class="form-group row">
-                <div class="col-md-6 mb-3 mb-lg-0">
-                  <input type="text" class="form-control" placeholder="Аты">
+                <div class="col-md-12">
+                  <input type="text" class="form-control" name="name" placeholder="Аты">
                 </div>
-                <div class="col-md-6">
-                  <input type="text" class="form-control" placeholder="Тегі">
+                
+              </div>
+
+              <div class="form-group row">
+                <div class="col-md-12">
+                  <input type="text" class="form-control" name="subject" placeholder="Тақырып">
                 </div>
               </div>
 
               <div class="form-group row">
                 <div class="col-md-12">
-                  <input type="text" class="form-control" placeholder="Тақырып">
-                </div>
-              </div>
-
-              <div class="form-group row">
-                <div class="col-md-12">
-                  <input type="email" class="form-control" placeholder="Электронды пошта">
+                  <input type="email" class="form-control" name="email" placeholder="Электронды пошта">
                 </div>
               </div>
               <div class="form-group row">
                 <div class="col-md-12">
-                  <textarea class="form-control" id="" cols="20" rows="5" placeholder="Пікір"></textarea>
+                  <textarea class="form-control" id="" cols="20" rows="5" name="message" placeholder="Пікір"></textarea>
                 </div>
               </div>
 

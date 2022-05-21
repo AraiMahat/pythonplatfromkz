@@ -1,13 +1,17 @@
 from audioop import mul
+import email
+from email import message
 from email.mime import image
 import errno
 import re
-import sys
-from django.http import Http404, JsonResponse
+import sys, uuid
+from urllib.parse import uses_relative
+from django.http import Http404, HttpResponse, JsonResponse
 from multiprocessing import context
 from django.shortcuts import get_object_or_404, render, redirect
 from django.views.generic.base import TemplateResponseMixin,View
 from requests import request
+from waitress import profile
 from .forms import UserUpdateForm, ProfileUpdateForm, CreateUserForm, UserRegistrationForm, ProfileForm, LecturesForm, LecturesTextForm, ImageForm
 from .models import Answer, Question, Result, Topics, User, Quiz, Chapters, Profile,Lectures,Lectures_text,EnrollCource, Image, Article
 from django.contrib.auth import login, authenticate, logout
@@ -15,6 +19,8 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 from django.db.models import Q
 from django.views.generic import ListView
+from django.core.mail import send_mail
+from django.conf import settings
 
 class QuizListView(ListView):
     model = Quiz
@@ -114,221 +120,140 @@ def save_quiz_view(request, pk):
         else:
             return JsonResponse({'passed': False, 'score':score_, 'results':results})
 
-def register(request):
-    form = CreateUserForm()
-    if request.method == "POST":
-        form = CreateUserForm(request.POST)
-        if form.is_valid():
-            form.save()
-            user = form.cleaned_data.get('username')
-            messages.success(request, 'Сіз тіркелдіңіз' + user)
-            return redirect('login')
-    else:
-        form = CreateUserForm()
-    
-    return render(request, "registration/registration.html", {"form": form})
-
 def loginView(request):
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
+        user_obj = User.objects.filter(username=username).first()
+        if user_obj is None:
+            messages.success(request, 'user not found')
+            return redirect('/login')
+        
+        profile_obj = Profile.objects.filter(user = user_obj).first()
 
-        user = authenticate(request, username = username, password=password)
-        if user is not None:
-            login(request, user)
-            if 'next' in request.POST:
-                return redirect(request.POST.get('next'))
-            else:
-                return redirect('topics')
+        if not profile_obj.is_verified:
+            messages.success(request, 'your username is not verified check your mail')
+            return redirect('/login')
+
+        user = authenticate(username=username, password=password)
+
+        if user is None:
+            messages.success(request, 'wrong password')
+            return redirect('/login')
+
+        login(request, user)
+        return redirect('/')
+
+
+
+        # user = authenticate(request, username = username, password=password)
+        # if user is not None:
+        #     login(request, user)
+        #     if 'next' in request.POST:
+        #         return redirect(request.POST.get('next'))
+        #     else:
+        #         return redirect('topics')
             
-        else:
-            messages.info(request, 'username incorrect')
+        # else:
+        #     messages.info(request, 'username incorrect')
 
 
     context = {}
     return render(request, "registration/login.html", context)
 
-class UserRegistrationView(TemplateResponseMixin, View):
-    template_name = 'registration/registration.html'
+def register(request):
+    if request.method == 'POST':
 
-    def get(self,request):
-        registration_form = UserRegistrationForm()
-        profile_form = ProfileForm()
-        return self.render_to_response({'registration_form': registration_form, 'profile_form': profile_form})
+        username = request.POST.get('username')
+        email = request.POST.get('email')
+        password1 = request.POST.get('password1')
+        # password2 = request.POST.get('password2')
 
-    def post(self, request):
-        registration_form = UserRegistrationForm(request.POST)
-        profile_form = ProfileForm(request.POST, files=request.FILES)
-        if registration_form.is_valid() and profile_form.is_valid():
-            new_user = registration_form.save(commit=False)
-        # Set the chosen password
-            new_user.set_password(
-            registration_form.cleaned_data['password'])
-        # Save the User object
-            new_user.save()
-            profile = profile_form.save(commit = False)
-            profile.user = new_user
-            profile.save()
-            return redirect('universystem:login')
-        return self.render_to_response({'registration_form': registration_form, 'profile_form': profile_form})
 
-# class ProfileView(TemplateResponseMixin,View):
-#     template_name = 'ProfileView.html'
-#     def get(self,request):
-#         lectures = Lectures.objects.all()
-#         if Profile.objects.filter(user= request.user).exists():
-#             lesson = EnrollCource.objects.filter(user= request.user)
-#             profile = Profile.objects.get(user = request.user)
-#         return self.render_to_response({'profile': profile, 'lectures': lectures, 'lesson': lesson})
-#     def profile(request):
-#         u_form = UserUpdateForm()
-#         p_form = ProfileUpdateForm()
+    try:
+
+        if User.objects.filter(username = username).first():
+            messages.success(request, 'username is taken')
+            return redirect('/register')
+
+        if User.objects.filter(email = email).first():
+            messages.success(request, 'email is taken')
+            return redirect('/register')
         
-#         context = {'u_form': u_form, 'p_form': p_form}
-#         return render(request, 'ProfileView.html', context)  
+        user_obj = User.objects.create(username=username, email=email)
+        user_obj.set_password(password1)
+        user_obj.save()
+
+        auth_token = str(uuid.uuid4())
+
+        profile_obj = Profile.objects.create(user=user_obj, auth_token = auth_token)
+        profile_obj.save()
+
+        send_mail_after_register(email, auth_token)
+
+        return redirect('/register/token')
+
+    except Exception as e:
+        print(e)
 
 
-class StudentProfileIndexView(TemplateResponseMixin,View):
-    template_name = 'home.html'    #set up pagination
-    def get(self, request):
-       lectures = Lectures.objects.all()
-       return self.render_to_response({'lectures': lectures})
-
-class LessonsDetailView(TemplateResponseMixin,View):
-    template_name = 'detail.html'
-    def get(self,request, id):
-        lectures = Lectures.objects.all()
-        lecturesone = Lectures.objects.get(id=id)
-        lectures_text = Lectures_text.objects.filter(lectures_id=id)
-
-        return self.render_to_response({'lectures': lectures, 'lecturesone':lecturesone,
-         'lectures_text':lectures_text, })
-
-    def post(self,request, id):
-        lectures = Lectures.objects.all()
-        lecturesone = Lectures.objects.get(id=id)
-        lectures_text = Lectures_text.objects.filter(lectures_id=id)
-        
-        if request.method == "POST":
-            codeareadata = request.POST['codearea']
-
-            try:
-
-                original_stdout = sys.stdout
-                sys.stdout = open('file.txt', 'w') 
-
-                exec(codeareadata)  
-
-                sys.stdout.close()
-
-                sys.stdout = original_stdout 
-
-
-                output = open('file.txt', 'r').read()
-
-            except Exception as e:
-                sys.stdout = original_stdout
-                output = e
-                
-        return self.render_to_response({'lectures': lectures, 'lecturesone':lecturesone, 
-         'lectures_text':lectures_text,'code': codeareadata , 'output': output})
-
-class AddEnrlcourseView(View):
-
-    def post(self,request,id):
-        courses_obj = EnrollCource(lectures_id=request.POST['lessonid'], user =request.user)
-        courses_obj.save()
-        return redirect('universystem:LessonsDetailView',id)
-
-class AddIndexView(TemplateResponseMixin,View):
-    template_name = 'test.html'
-    def get(self,request):
-        lectures_form = LecturesForm()
-        lectures = Lectures.objects.all()
-        return self.render_to_response({'lectures_form':lectures_form,'lectures':lectures})
-
-    def post(self,request):
-        lectures_form = LecturesForm(data=request.POST)
-        if lectures_form.is_valid():#тексеру
-            lectures_formadd = lectures_form.save(commit=False)
-            lectures_formadd.save()
-            return redirect('universystem:AddIndexView')
-        return self.render_to_response({'lectures_form': lectures_form})
-
-# class AddTextIndexView(TemplateResponseMixin,View):
-#     template_name = 'addtext.html'
-#     def get(self,request):
-#         lectures_text = LecturesTextForm()
-#         lectures = Lectures_text.objects.all()
-#         return self.render_to_response({'lectures_text':lectures_text,'lectures':lectures})
-
-#     def post(self,request):
-#         lectures_text = LecturesTextForm(data=request.POST)
-#         if lectures_text.is_valid():#тексеру
-#             lectures_formadd = lectures_text.save(commit=False)
-#             lectures_formadd.save()
-#             return redirect('universystem:AddTextIndexView')
-#         return self.render_to_response({'lectures_text': lectures_text,'lectures':lectures})
-
-
-# def runcode(request):
-
-#     if request.method == "POST":
-#         codeareadata = request.POST['codearea']
-
-#         try:
-#             #save original standart output reference
-
-#             original_stdout = sys.stdout
-#             sys.stdout = open('file.txt', 'w') #change the standard output to the file we created
-
-#             #execute code
-
-#             exec(codeareadata)  #example =>   print("hello world")
-
-#             sys.stdout.close()
-
-#             sys.stdout = original_stdout  #reset the standard output to its original value
-
-#             # finally read output from file and save in output variable
-
-#             output = open('file.txt', 'r').read()
-
-#         except Exception as e:
-#             # to return error in the code
-#             sys.stdout = original_stdout
-#             output = e
-
-
-#     #finally return and render index page and send codedata and output to show on page
-
-#     return render(request , 'compiler.html', {"code":codeareadata , "output":output})
+    # form = CreateUserForm()
+    # if request.method == "POST":      
+    #     form = CreateUserForm(request.POST)
+    #     if form.is_valid():
+    #         form.save()
+    #         user = form.cleaned_data.get('username')
+    #         messages.success(request, 'Сіз тіркелдіңіз' + user)
+    #         return redirect('login')
+    # else:
+    #     form = CreateUserForm()
+    # context = {"form": form}
     
+    return render(request, "registration/registration.html")
 
-# def runcode(request):
-#     if request.method == 'POST':
-#         code_part = request.POST['code_area']
-#         input_part = request.POST['input_area']
-#         y = input_part
-#         input_part = input_part.replace("\n"," ").split(" ")
-#         def input():
-#             a = input_part[0]
-#             del input_part[0]
-#             return a
-#         try:
-#             orig_stdout = sys.stdout
-#             sys.stdout = open('file.txt', 'w')
-#             exec(code_part)
-#             sys.stdout.close()
-#             sys.stdout=orig_stdout
-#             output = open('file.txt', 'r').read()
-#         except Exception as e:
-#             sys.stdout.close()
-#             sys.stdout=orig_stdout
-#             output = e
-#         print(output)
-#     res = render(request,'compiler.html',{"code":code_part,"input":y,"output":output})
-#     return res
+def success(request):
+    return render(request, 'registration/success.html')
+
+def token_send(request):
+    return render(request, 'registration/token_send.html')
+    
+def error(request):
+    return render(request, 'registration/error.html')
+
+def verify(request, auth_token):
+    try:
+        profile_obj = Profile.objects.filter(auth_token = auth_token).first()
+        
+        if profile_obj:
+            if profile_obj.is_verified:
+                messages.success(request, 'your account is already verified')
+                return redirect('/login')
+
+
+            profile_obj.is_verified = True
+            profile_obj.save()
+            messages.success(request, 'your account has been verified')
+            return redirect('/login')
+        else:
+            return redirect('/register/error')
+
+    except Exception as e:
+        print(e)
+
+
+
+def send_mail_after_register(email, auth_token):
+    subject = 'Your account need to be verified'
+    message = f'hi paste the link to verify your account http://127.0.0.1:8000/register/verify/{auth_token}'
+    email_from = settings.EMAIL_HOST_USER
+    recipient_list = [email]
+    send_mail(subject, message, email_from, recipient_list)
+
+
+
+
+
+
 
 def runcode(request):
     return render(request, 'compiler.html')
@@ -336,7 +261,51 @@ def runcode(request):
 
 
 def homepage(request):
-    return render(request, 'index.html')
+
+    if request.method == 'POST':
+       
+        name = request.POST.get('name')
+        subject = request.POST.get('subject')
+        email = request.POST.get('email')
+        message = request.POST.get('message')
+
+        
+        from_email = settings.EMAIL_HOST_USER
+        to_email = [from_email , 'pythonplatformkz@gmail.com']
+        contact_message = "%s: %s via %s" % (
+            name , 
+            message , 
+            email)
+
+        if subject:
+
+            send_mail(
+                subject,
+                contact_message,
+                from_email,
+                to_email,
+                fail_silently=False,
+            )
+    
+    
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        user = authenticate(request, username = username, password=password)
+        if user is not None:
+            login(request, user)
+            if 'next' in request.POST:
+                return redirect(request.POST.get('next'))
+            else:
+                return redirect('universystem:topics')
+            
+        else:
+            messages.info(request, 'username incorrect')
+
+
+    context = {}
+    
+    
+    return render(request, 'index.html',context)
 
 
 def quiz(request):
@@ -395,19 +364,7 @@ def search_venues(request):
 
 
 
-# def get_queryset(query=None):
-#     queryset = []
-#     queries = query.split(" ")
-#     for q in queries:
-#         posts = Article.objects.filter(
-#             Q(topic1__icontains=q) |
-#             Q(body1__icontains=q)
-#         ).distinct()
 
-#         for post in posts:
-#             queryset.append(post)
-        
-#     return list(set(queryset))
 
 
 def topics(request):

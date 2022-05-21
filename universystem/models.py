@@ -71,8 +71,12 @@ class Result(models.Model):
 
        
 class Profile(models.Model):
-    photo = models.ImageField(default='default_profile_picture.png', upload_to='images/profile', null=True)
+    photo = models.ImageField(default='images/profile/pfp.png', upload_to='images/profile', null=True)
     user = models.OneToOneField(User, on_delete=models.CASCADE, null=True ,blank=True)
+    auth_token = models.CharField(max_length=100)
+    is_verified = models.BooleanField(default=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+    
     def __str__(self):
         return self.user.username
     
