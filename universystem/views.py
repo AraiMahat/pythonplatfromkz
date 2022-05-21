@@ -43,34 +43,6 @@ def quiz_data_view(request, pk):
         'time': quiz.time,
     })
 
-def view_profile(request):
-    result = Result.objects.filter(user=request.user)
-    context = {
-        'user': request.user,
-        'result': result
-    }
-    return render(request, 'ProfileView.html', context)
-
-def edit_profile(request):
-    if request.method == 'POST':
-        u_form = UserUpdateForm(request.POST, instance=request.user)
-        p_form = ProfileUpdateForm(request.POST, request.FILES, instance=request.user.profile)
-
-        if u_form.is_valid() and p_form.is_valid():
-            u_form.save()
-            p_form.save()
-            messages.success(request, f'Аккаунт жаңа баптаулары сақталды')
-            return redirect('universystem:profile')
-    else:
-        u_form = UserUpdateForm(instance=request.user)
-        p_form = ProfileUpdateForm(instance=request.user.profile)
-
-    context = {
-        'user': request.user,
-        'u_form': u_form,
-        'p_form': p_form
-    }
-    return render(request, 'editprofile.html', context)
 
 def save_quiz_view(request, pk):
     # print(request.POST)
@@ -252,7 +224,34 @@ def send_mail_after_register(email, auth_token):
 
 
 
+def view_profile(request):
+    result = Result.objects.filter(user=request.user)
+    context = {
+        'user': request.user,
+        'result': result
+    }
+    return render(request, 'ProfileView.html', context)
 
+def edit_profile(request):
+    if request.method == 'POST':
+        u_form = UserUpdateForm(request.POST, instance=request.user)
+        p_form = ProfileUpdateForm(request.POST, request.FILES, instance=request.user.profile)
+
+        if u_form.is_valid() and p_form.is_valid():
+            u_form.save()
+            p_form.save()
+            messages.success(request, f'Аккаунт жаңа баптаулары сақталды')
+            return redirect('universystem:profile')
+    else:
+        u_form = UserUpdateForm(instance=request.user)
+        p_form = ProfileUpdateForm(instance=request.user.profile)
+
+    context = {
+        'user': request.user,
+        'u_form': u_form,
+        'p_form': p_form
+    }
+    return render(request, 'editprofile.html', context)
 
 
 def runcode(request):
@@ -308,22 +307,10 @@ def homepage(request):
     return render(request, 'index.html',context)
 
 
-def quiz(request):
-    return render(request, 'quiz.html')
 
 
-def image_upload_view(request):
-    """Process images uploaded by users"""
-    if request.method == 'POST':
-        form = ImageForm(request.POST, request.FILES)
-        if form.is_valid():
-            form.save()
-            # Get the current instance object to display in the template
-            img_obj = form.instance
-            return render(request, 'index.html', {'form': form, 'img_obj': img_obj})
-    else:
-        form = ImageForm()
-    return render(request, 'index.html', {'form': form})
+
+
 
 def article_list(request, slug):
     # posts = None
@@ -383,6 +370,10 @@ def post_detail(request, slug):
     context = {'post': post}
 
     return render(request, "lesson.html", context)
+
+def exam (request):
+
+    return render(request, "exam.html")
 
 
 

@@ -62,6 +62,7 @@ text-decoration: none;
   a.course:hover{
       color:black;
   }
+ 
     </style>
 </head>
 
@@ -84,7 +85,7 @@ text-decoration: none;
                     {% for topic in topics %}
                     <div class="item mb-4">
                         <div class="card border-0 shadow">
-                            <img src="{{topic.image.url}}" alt="" class="card-img-top">
+                            <a href="/article/{{topic.slug}}"><img src="{{topic.image.url}}" alt="" class="card-img-top"></a>
                             <div class="card-body" style="width:345px; height: 315.390px;">
                                 <div style="margin-left: 2rem;">
                                     <h4 class="card-title text-center" style="font-weight: bold;"><a href="/article/{{topic.slug}}">{{topic.article_id}}</a></h4>

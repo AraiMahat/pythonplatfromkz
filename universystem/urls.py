@@ -24,14 +24,9 @@ urlpatterns =[
 	path('quiz/<int:pk>/', views.quiz_view, name="quiz-view"),
 	path('quiz/<int:pk>/save/', views.save_quiz_view, name="save-view"),
 	path('quiz/<int:pk>/data/', views.quiz_data_view, name="quiz-data-view"),
+	path('quiz/exam', views.exam, name="exam"),
+
 	path('profile/edit', views.edit_profile, name="edit_profile"),
-
-
-
-	
-	
-
-
 
 ]
 

@@ -102,6 +102,11 @@ class Lectures(models.Model):
     def __str__(self):
         return self.name
 
+    class Meta:
+        verbose_name = 'Лекции'
+        verbose_name_plural = 'Лекции'
+
+
 class Lectures_text(models.Model):
     lectures_id = models.ForeignKey(Lectures, on_delete=models.CASCADE, null=True)
     title = models.CharField(max_length=200)
