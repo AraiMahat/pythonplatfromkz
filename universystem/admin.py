@@ -1,10 +1,12 @@
 from django.contrib import admin
-from .models import Answer, Profile, Article, Question, Quiz, Result, Topics
+from .models import Answer, Profile,Lectures, Article, Question, Quiz, Result, Topics
 
 
 admin.site.register(Profile)
 admin.site.register(Result)
 admin.site.register(Quiz)
+admin.site.register(Lectures)
+
 
 
 class AnswerInline(admin.TabularInline):
