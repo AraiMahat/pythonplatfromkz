@@ -59,7 +59,7 @@ def edit_profile(request):
         if u_form.is_valid() and p_form.is_valid():
             u_form.save()
             p_form.save()
-            messages.success(request, f'Ваш аккаунт был обновлен')
+            messages.success(request, f'Аккаунт жаңа баптаулары сақталды')
             return redirect('universystem:profile')
     else:
         u_form = UserUpdateForm(instance=request.user)
@@ -126,19 +126,19 @@ def loginView(request):
         password = request.POST.get('password')
         user_obj = User.objects.filter(username=username).first()
         if user_obj is None:
-            messages.success(request, 'user not found')
+            messages.success(request, 'Логин табылмады...')
             return redirect('/login')
         
         profile_obj = Profile.objects.filter(user = user_obj).first()
 
         if not profile_obj.is_verified:
-            messages.success(request, 'your username is not verified check your mail')
+            messages.success(request, 'Логин тексерілімнен өткен жоқ! Электронды поштаңызды тексеріңіз...')
             return redirect('/login')
 
         user = authenticate(username=username, password=password)
 
         if user is None:
-            messages.success(request, 'wrong password')
+            messages.success(request, 'Қате құпия сөз...')
             return redirect('/login')
 
         login(request, user)
@@ -226,13 +226,13 @@ def verify(request, auth_token):
         
         if profile_obj:
             if profile_obj.is_verified:
-                messages.success(request, 'your account is already verified')
+                messages.success(request, 'Аккаунт тексеруден өтті!')
                 return redirect('/login')
 
 
             profile_obj.is_verified = True
             profile_obj.save()
-            messages.success(request, 'your account has been verified')
+            messages.success(request, 'Сіздің аккаунт тексеруден бұрын өткен...')
             return redirect('/login')
         else:
             return redirect('/register/error')
@@ -243,8 +243,8 @@ def verify(request, auth_token):
 
 
 def send_mail_after_register(email, auth_token):
-    subject = 'Your account need to be verified'
-    message = f'hi paste the link to verify your account http://127.0.0.1:8000/register/verify/{auth_token}'
+    subject = 'Аккаунт верификациясы'
+    message = f'Верификациядан өту үшін сілтемеге басыңыз https://pythonplatformkz.herokuapp.com/register/verify/{auth_token}'
     email_from = settings.EMAIL_HOST_USER
     recipient_list = [email]
     send_mail(subject, message, email_from, recipient_list)
@@ -299,7 +299,7 @@ def homepage(request):
                 return redirect('universystem:topics')
             
         else:
-            messages.info(request, 'username incorrect')
+            messages.info(request, 'Қате логин терілді...')
 
 
     context = {}

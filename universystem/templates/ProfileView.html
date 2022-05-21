@@ -80,7 +80,13 @@
                     <p>{{user.date_joined}}</p>
                 </div>
                 <a href="{% url 'universystem:edit_profile' %}" class="btn btn-primary" style="border-radius: 50px;  border: none; padding: 10px;">Аккаунт баптаулары</a>
-
+                {% if messages %}
+                {% for message in messages %}   
+                <div class="alert alert-info">
+                    {{message}}
+                </div>
+                {% endfor %}
+                {% endif %}
             </div>
         </div>
     </div>

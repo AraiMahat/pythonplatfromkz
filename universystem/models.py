@@ -149,8 +149,8 @@ class Article(models.Model):
         return reverse('article', kwargs={'slug': self.slug})
 
     class Meta:
-        verbose_name = 'Подтемы'
-        verbose_name_plural = 'Подтемы'
+        verbose_name = 'Темы'
+        verbose_name_plural = 'Темы'
 
 
 class Topics(models.Model):
