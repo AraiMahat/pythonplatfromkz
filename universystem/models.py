@@ -12,6 +12,7 @@ from django.urls import reverse
 from ckeditor.fields import RichTextField
 from ckeditor_uploader.fields import RichTextUploadingField
 import random
+from PIL import Image, ImageOps
 
 class Quiz(models.Model):
     name = models.CharField(max_length=120)
@@ -74,6 +75,21 @@ class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, null=True ,blank=True)
     def __str__(self):
         return self.user.username
+    
+    class Meta:
+        verbose_name = 'Профили'
+        verbose_name_plural = 'Профили'
+    
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+
+        # img = Image.open(self.photo.path)
+
+        # if img.height > 300 or img.width > 300:
+        #     output_size = (300, 300)
+        #     resized = ImageOps.fit(img, output_size, Image.ANTIALIAS)
+        #     resized.save(self.photo.path)
+
 
 class Lectures(models.Model):
     name = models.CharField(max_length=200)

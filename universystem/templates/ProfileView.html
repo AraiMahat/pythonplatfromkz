@@ -67,19 +67,19 @@
     <div class="card h-100">
         <div class="card-body">
             <div class="account-settings">
-                <div class="user-profile" style="width: 400px;
+                <div class="user-profile" style="width: 300px;
                 height: 300px;">
                     <div class="user-avatar">
-                        <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="profilephoto" >
+                        <img src="{{user.profile.photo.url}}" alt="profilephoto" >
                     </div>
                     <h5 class="user-name" style="padding-top: 30px;">Тіркелгі аты: {{ user.username }}</h5>
                     <h6 class="user-email">Эл.пошта: {{ user.email }}</h6>
                 </div>
-                <div class="about">
+                <div class="about" >
                     <h5>Регистрация күні:</h5>
                     <p>{{user.date_joined}}</p>
                 </div>
-                <!-- <a href="{% url 'universystem:edit_profile' %}" class="btn btn-primary" style="border-radius: 50px;  border: none; padding: 10px;">Аккаунт баптаулары</a> -->
+                <a href="{% url 'universystem:edit_profile' %}" class="btn btn-primary" style="border-radius: 50px;  border: none; padding: 10px;">Аккаунт баптаулары</a>
 
             </div>
         </div>
