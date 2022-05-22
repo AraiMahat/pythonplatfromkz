@@ -45,15 +45,127 @@
         width: 100%;
         height: auto;
     }
-    .user-name{
+    
+    .user-avatar{
+        width: 200px;
+        height: 200px;
+    }
+   
+    #account{
+        border-radius: 50px;
+        border: none; 
+        padding: 10px;
+    }
+    .breadcrumb{
+        background-color: white; 
+        font-size: 18px; 
         margin-top: 4rem;
+
+    }
+    .user-name{
+        padding-top: 30px;
+    }
+
+    @media all and (max-width: 1400px){
+        .breadcrumb{
+        background-color: white; 
+        font-size: 16px; 
+        margin-top: 2rem;
+        margin-bottom: -0.5rem;
+        
+        }
+        .user-avatar{
+        width: 150px;
+        height: 150px;
+    }
+    .about h5{
+        font-size: 16px;
+    }
+    .about p{
+        font-size: 14px;
+    }
+    }
+    @media all and (max-width: 1200px){
+        .breadcrumb{
+        background-color: white; 
+        font-size: 16px; 
+        margin-top: 2rem;
+        margin-bottom: -0.5rem;
+        
+        }
+        .user-avatar{
+        width: 120px;
+        height: 120px;
+    }
+    .user-name{
+        margin-top: -1rem;
+        font-size: 16px;
+    }
+    .about h5{
+        font-size: 16px;
+    }
+    .about p{
+        font-size: 14px;
+    }
+    }
+    @media all and (max-width: 995px){
+        .account-settings{
+        text-align: center;
+        
+    }
+    .user-avatar{
+        width: 120px;
+        height: 120px;
+        display: block;
+    margin: 0 auto;
+    }
+    }
+
+
+    @media all and (max-width: 500px){
+        .breadcrumb{
+        background-color: white; 
+        font-size: 14px; 
+        margin-top: 1.5rem;
+        margin-bottom: -0.5rem;
+    }
+    .user-profile{
+        width: 300px;
+        height: 300px;
+    }
+    .user-avatar{
+        width: 100px;
+        height: 100px;
+        margin-left: 2rem;
+    }
+    
+    .user-name{   
+        margin-top: -1rem;
+        font-size: 18px;
     }
     .about{
-        margin-top: 1rem;
+        margin-top: -8rem;
+    }
+    .about h5{
+        font-size: 16px;
+    }
+    .about p{
+        font-size: 14px;
+    }
+    #account{
+        border-radius: 50px;
+        border: none; 
+        font-size: 14px;
+        padding: 10px;
+    }
+    .account-settings{
+        margin-left: 3.8rem;
+        text-align: justify;
+    }
     }
     </style>
  <div class="container">
-    <ol class="breadcrumb" style="background-color: white; font-size: 18px; margin-top: 4rem;">
+    <ol class="breadcrumb">
         <li class="breadcrumb-item active" aria-current="page"><a href="{% url 'universystem:topics' %}" >Курс</a></li>
        <li class="breadcrumb-item"><a href="{% url 'universystem:profile' %}" >Жеке кабинет</a></li>
    
@@ -67,19 +179,18 @@
     <div class="card h-100">
         <div class="card-body">
             <div class="account-settings">
-                <div class="user-profile" style="width: 300px;
-                height: 300px;">
+                <div class="user-profile">
                     <div class="user-avatar">
-                        <img src="{{user.profile.photo.url}}" alt="profilephoto" >
+                        <img src="{{user.profile.photo.url}}" id="pfp" alt="profilephoto" >
                     </div>
-                    <h5 class="user-name" style="padding-top: 30px;">Тіркелгі аты: {{ user.username }}</h5>
+                    <h5 class="user-name">Тіркелгі аты: {{ user.username }}</h5>
                     <h6 class="user-email">Эл.пошта: {{ user.email }}</h6>
                 </div>
                 <div class="about" >
                     <h5>Регистрация күні:</h5>
                     <p>{{user.date_joined}}</p>
                 </div>
-                <a href="{% url 'universystem:edit_profile' %}" class="btn btn-primary" style="border-radius: 50px;  border: none; padding: 10px;">Аккаунт баптаулары</a>
+                <a href="{% url 'universystem:edit_profile' %}" class="btn btn-primary" id="account">Аккаунт баптаулары</a>
                 {% if messages %}
                 {% for message in messages %}   
                 <div class="alert alert-info">

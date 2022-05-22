@@ -11,7 +11,7 @@ from multiprocessing import context
 from django.shortcuts import get_object_or_404, render, redirect
 from django.views.generic.base import TemplateResponseMixin,View
 from requests import request
-from waitress import profile
+
 from .forms import UserUpdateForm, ProfileUpdateForm, CreateUserForm, UserRegistrationForm, ProfileForm, LecturesForm, LecturesTextForm, ImageForm
 from .models import Answer, Question, Result, Topics, User, Quiz, Chapters, Profile,Lectures,Lectures_text,EnrollCource, Image, Article
 from django.contrib.auth import login, authenticate, logout

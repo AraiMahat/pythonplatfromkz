@@ -4,33 +4,55 @@
 {% load static %}
 
 {% block content %}
-<div class="container">
-    <ol class="breadcrumb" style="background-color: white; font-size: 18px; margin-top: 4rem;">
-        <li class="breadcrumb-item active" aria-current="page"><a href="{% url 'universystem:topics' %}" >Курс</a></li>
-       <li class="breadcrumb-item"><a href="{% url 'universystem:main-quiz' %}" >Тест</a></li>
-       <li class="breadcrumb-item"><a href="http://127.0.0.1:8000/quiz/{{obj.id}}" >{{obj.name}}</a></li>
+<div class="authincation h-100" style="background-color: #7971ea;">
+    <div class="container h-100" >
+        <!-- <div class="row justify-content-center  h-100 align-items-center" > -->
+            <div class="col-md-6">
+                <div class="authincation-content" >
+                    <div class="row no-gutters">
+                        <div class="col-xl-12">
+                            <div class="auth-form">
+                                <div class="card" >
+                                    <div class="card-body" >
+                                        <ol class="breadcrumb">
+                                            <li class="breadcrumb-item active" aria-current="page"><a href="{% url 'universystem:topics' %}" >Курс</a></li>
+                                           <li class="breadcrumb-item"><a href="{% url 'universystem:main-quiz' %}" >Тест</a></li>
+                                           <li class="breadcrumb-item"><a href="http://127.0.0.1:8000/quiz/{{obj.id}}" >{{obj.name}}</a></li>
 
-   
-   </ol>
-    <div class="row">
-        <div class="col">
-            <h3 class="card-title">{{obj.name}}</h3>
 
-            
-    <p>Минималды балл: {{obj.required_score_to_pass}}%</p>
-</div>
-        <div class="col text-right" id="timer-box"></div>
+                                       </ol>
+                                        <div class="row">
+                                            <div class="col">
+                                                <h3 class="card-title">{{obj.name}}</h3>
+
+
+                                        <p>Минималды балл: {{obj.required_score_to_pass}}%</p>
+                                    </div>
+                                            <div class="col text-right" id="timer-box"></div>
+                                        </div>
+
+
+
+                                        <form action="" id="quiz-form" class="mt-3 mb-3 ">
+                                            {% csrf_token %}
+                                            <div id="quiz-box"></div>
+                                            <button type="submit" class="btn btn-primary mt-3" style="background-color: #7971ea; border: none; border-radius: 50px;">Аяқтау</button>
+                                        </form>
+                                    <div id="score-box"></div>
+                                    <div id="result-box"></div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    
+</div>
 
-
-    <form action="" id="quiz-form" class="mt-3 mb-3 ">
-        {% csrf_token %}
-        <div id="quiz-box"></div>
-        <button type="submit" class="btn btn-primary mt-3">Аяқтау</button>
-    </form>
-<div id="score-box"></div>
-<div id="result-box"></div>
+<div class="container">
 
 </div>
 
@@ -46,7 +68,7 @@ const timerBox = document.getElementById('timer-box')
 
 
 const activateTimer = (time) =>{
-    
+
     if (time.toString().length < 2) {
         timerBox.innerHTML = `<b>0${time}:00</b>`
     } else {
@@ -62,7 +84,7 @@ const activateTimer = (time) =>{
         if (seconds < 0) {
             seconds = 59
             minutes --
-        } 
+        }
         if (minutes.toString().length < 2) {
             displayMinutes = '0' + minutes
         } else {
@@ -81,7 +103,7 @@ const activateTimer = (time) =>{
                 alert("Уақыт аяқталды!")
                 sendData()
             }, 500)
-           
+
 
         }
 
@@ -144,7 +166,7 @@ const sendData = () => {
         url: `${url}save/`,
         data: data,
         success: function(response){
-            
+
             const results = response.results
             console.log(results)
             quizForm.classList.add('not-visible') //!!!!!!!!!!
@@ -208,17 +230,17 @@ quizForm.addEventListener('submit', e=>{
     color: #7971ea;
     text-decoration: none;
     }
-    
+
     /* visited link */
     a:visited {
     color: #7971ea;
     }
-    
+
     /* mouse over link */
     a:hover {
     color: black;
     }
-    
+
     /* selected link */
     a:active {
     color: black;
@@ -226,5 +248,34 @@ quizForm.addEventListener('submit', e=>{
     a.course{
     color: #7971ea;
     }
+    .breadcrumb{
+        background-color: white; font-size: 18px; margin-top: 1rem;
+    }
+    .card{
+        margin: 4rem;
+         padding: 0 3rem;
+          width: 80rem; 
+          box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, 
+          rgba(0, 0, 0, 0.12) 0px -12px 30px, 
+          rgba(0, 0, 0, 0.12) 0px 4px 6px, 
+          rgba(0, 0, 0, 0.17) 0px 12px 13px, 
+          rgba(0, 0, 0, 0.09) 0px -3px 5px;
+    }
+
+    @media all and (max-width: 500px){
+        .breadcrumb{
+        font-size: 12px;
+        margin-top: 1rem;
+        margin-bottom: 2rem;
+    }}
+    .card-title{
+        font-size: 20px;
+    }
+    .card{
+        margin: 1rem -0.2rem;
+         padding: 0.5rem 0.5rem;
+          width: 390px; 
+    }
+
     </style>
-{% endblock %}  
+{% endblock %}

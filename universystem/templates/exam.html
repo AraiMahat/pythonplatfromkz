@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="authincation h-100" style="background-color: #7971ea;">
+    <div class="container h-100">
+        <div class="row justify-content-center h-100 align-items-center">
+            
+                        <div class="card" >
+                            <div class="card-body align-items-center" >
+                                <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSc1yhMNIyksVj8ZbVR-cpdzvqFvZ9lyGe_Kh-IO0_EtdVU5JQ/viewform?embedded=true"  frameborder="0" marginheight="0" marginwidth="0">Загрузка…</iframe>
+
+                </div>
+            
+               
+            </div>
+        </div>
+    </div>
+</div> 
+<style>
+  .card{
+    margin: 4rem;
+    width:700px; 
+    height:870px;
+     box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+      rgba(0, 0, 0, 0.12) 0px -12px 30px,
+       rgba(0, 0, 0, 0.12) 0px 4px 6px, 
+       rgba(0, 0, 0, 0.17) 0px 12px 13px,
+        rgba(0, 0, 0, 0.09) 0px -3px 5px;}
+ iframe{
+  width:640px;
+  height:828px;
+ }
+        @media all and (max-width: 500px){
+          .card{
+         
+        margin: 1rem -0.2rem;
+         padding: 0.5rem 0.5rem;
+          width: 390px; 
+
+          }
+          iframe{
+            margin-left: -1.5rem;
+  width:390px;
+  height:828px;
+ }
+        }
+</style>
+
+{% endblock %}

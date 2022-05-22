@@ -40,7 +40,7 @@
 
 
 <div class="container py-4 py-xl-5">
-    <ol class="breadcrumb" style="background-color: white; font-size: 18px; color: #7971ea;">
+    <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="{% url 'universystem:topics' %}"><span>Курс</span></a></li>
         <li class="breadcrumb-item"><a href="#"><span>{{article.title}}</span></a></li>
         <!-- <li class="breadcrumb-item"><a href="#"><span>Data</span></a></li> -->
@@ -92,8 +92,8 @@
         </div>
         <div role="tabpanel"class="tab-pane" id="quiz">
           <div class="card-body">
-            <div class="container-fluid">
-              <h3 class="card-title"><a href="{% url 'universystem:main-quiz' %}">Тақырып бойынша тестті өту</a></h3>
+            <div class="container-fluid" style="margin-bottom: 2rem;">
+              <h3 class="card-title"><a href="{% url 'universystem:main-quiz' %}">Тақырып бойынша тестке өту</a></h3>
 
               
 
@@ -149,20 +149,12 @@
           </div>
         </div>
       </div>
-<!--   
-
-    <div class="articles">
-
-      <a href="http://127.0.0.1:8000/lesson/1" ><h2>{{ article.topic1 }}</h2></a>
-    <p id="content">{{ article.body1|safe}} </p> -->
-    <!-- <p id="content">{{ post.date}} </p> -->
 
      
 
     </div>
     
 </div>
-<!-- <div class="container" id="buttons"><button class="btn btn-primary" id="prev" type="button">Артқа</button><button class="btn btn-primary" id="next" type="button">Келесі</button></div> -->
 
 
 <style>
@@ -221,7 +213,9 @@ text-decoration: none;
     padding: 8px 25px;
     float: right;
   }
-  
+  .breadcrumb{
+    background-color: white; font-size: 18px; color: #7971ea;
+  }
   #content {
     margin: 50px;
   }
@@ -249,5 +243,26 @@ text-decoration: none;
 
   #code {
     margin: 30px;
-  }</style>
+  }
+  @media all and (max-width: 500px){
+    .breadcrumb{
+      margin-top: -0.5rem;
+    font-size: 12px; 
+  }
+  .font-weight-bold{
+    font-size: 18px;
+    text-align: center;
+  }
+  }
+  .card{
+    margin-top: -2rem;
+  }
+  .nav-item{
+    font-size: 14px;
+  }
+  .card-title{
+    margin:-1rem 0;
+    font-size: 18px;
+  }
+  </style>
 {% endblock %}  

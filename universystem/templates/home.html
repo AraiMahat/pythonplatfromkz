@@ -62,6 +62,53 @@ text-decoration: none;
   a.course:hover{
       color:black;
   }
+  #title{
+    font-size: 50px; 
+    margin-top: 4rem;
+  }
+  #article_id{
+    text-align: center;
+    font-weight: bold;
+  }
+  .card-body{
+    width:345px; 
+    height: 315.390px;
+  }
+  .card-text{
+    font-size: 18px;
+  }
+
+  @media all and (max-width: 500px) {
+#title{
+    font-size: 30px;
+    margin-top: 2rem;
+}
+#article_id{
+    text-align: center;
+    font-weight: bold;
+    font-size: 20px;
+  }
+
+#article{
+    margin: auto;
+    text-align: center;
+}
+.card-body{
+    width:345px; 
+    height: 250px;
+  }
+  #card{
+      margin-top: -3rem;
+  }
+  .card-text{
+    font-size: 16px;
+  }
+      
+  }
+
+  @media(orientation: landscape) {
+
+  }
  
     </style>
 </head>
@@ -72,35 +119,26 @@ text-decoration: none;
 
     <div class="container">
        
-        <!-- <ol class="breadcrumb" style="background-color: white; font-size: 18px; margin-top: 4rem;">
-             <li class="breadcrumb-item active" aria-current="page"><a href="{% url 'universystem:topics' %}"class="course" >Курс</a></li>
-            <li class="breadcrumb-item"></li>
-        
-        </ol> -->
       
-        <h1 class="text-center fw-bold display-1 mb-5" style=" font-size: 50px; margin-top: 4rem;"><span style="color: #7971ea;">Python</span> курсы</h1>
+        <h1 class="text-center fw-bold display-1 mb-5" id="title"><span style="color: #7971ea;">Python</span> курсы</h1>
         <div class="row">
             <div class="col-12 m-auto">
                 <div class="owl-carousel owl-theme">
                     {% for topic in topics %}
                     <div class="item mb-4">
-                        <div class="card border-0 shadow">
+                        <div class="card border-0 shadow" id="card">
                             <a href="/article/{{topic.slug}}"><img src="{{topic.image.url}}" alt="" class="card-img-top"></a>
-                            <div class="card-body" style="width:345px; height: 315.390px;">
+                            <div class="card-body">
                                 <div style="margin-left: 2rem;">
-                                    <h4 class="card-title text-center" style="font-weight: bold;"><a href="/article/{{topic.slug}}">{{topic.article_id}}</a></h4>
+                                    <h4 class="card-title text-center" id="article_id" ><a href="/article/{{topic.slug}}" id="article">{{topic.article_id}}</a></h4>
                                 </div>
                                 <div class="content">
-                                    <p class="card-text" style="font-size: 18px;">1. {{topic.topic1}}<br>2. {{topic.topic2}}<br>3. {{topic.topic3}}<br><br></p>
+                                    <p class="card-text" >1. {{topic.topic1}}<br>2. {{topic.topic2}}<br>3. {{topic.topic3}}<br><br></p>
                                     </div>
                             </div>
                         </div>
                     </div>
                     {% endfor %}
-
-
-                    
-
                 </div>
             </div>
         </div>

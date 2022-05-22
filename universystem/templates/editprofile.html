@@ -48,76 +48,204 @@
         margin-left: 3rem;
     }
     .user-name{
-        margin-top: 6rem;
-    }
-    .about{
         margin-top: 1rem;
     }
+    .about{
+        margin-top: -4rem;
+    }
+    
+    .breadcrumb{
+        background-color: white; 
+        font-size: 18px; 
+        margin-top: 4rem;
+
+    }
+    
+    @media all and (max-width: 1400px){
+        .breadcrumb{
+        background-color: white; 
+        font-size: 16px; 
+        margin-top: 2rem;
+        margin-bottom: -0.5rem;
+        
+        }
+        .user-avatar{
+        width: 150px;
+        height: 150px;
+    }
+    .about h5{
+        font-size: 16px;
+    }
+    .about p{
+        font-size: 14px;
+    }
+    .user-profile{
+        width: 300px;
+        height: 300px;
+    }
+    }
+    @media all and (max-width: 1200px){
+        .breadcrumb{
+        background-color: white; 
+        font-size: 16px; 
+        margin-top: 2rem;
+        margin-bottom: -0.5rem;
+        
+        }
+        .user-avatar{
+        width: 120px;
+        height: 120px;
+    }
+    .user-name{
+        margin-top: 1rem;
+        font-size: 16px;
+    }
+    .about{
+        margin-top: -6rem;
+    }
+    .about h5{
+        font-size: 16px;
+    }
+    .about p{
+        font-size: 14px;
+    }
+    }
+    @media all and (max-width: 995px){
+        .breadcrumb{
+        background-color: white; 
+        font-size: 16px; 
+        margin-top: 1.5rem;
+
+    }
+        .account-settings{
+        text-align: center;
+        
+    }
+    .user-profile{
+        text-align: center;
+    }
+    .user-avatar{
+        width: 120px;
+        height: 120px;
+        display: block;
+        margin: 0 auto;
+    }
+    }
+
+
+    @media all and (max-width: 500px){
+        .form-group{
+            margin-left: -1rem;
+        }
+        .breadcrumb{
+        background-color: white; 
+        font-size: 14px; 
+        margin-top: 1.5rem;
+        margin-bottom: -0.5rem;
+    }
+    .user-profile{
+        width: 300px;
+        height: 300px;
+        text-align: justify;
+    }
+    .user-avatar{
+        width: 100px;
+        height: 100px;
+        margin-left: 2rem;
+    }
+    
+    .user-name{   
+        margin-top: 1rem;
+        
+        font-size: 18px;
+    }
+    .about{
+        margin-top: -8rem;
+    }
+    .about h5{
+        font-size: 16px;
+    }
+    .about p{
+        font-size: 14px;
+    }
+    #account{
+        border-radius: 50px;
+        border: none; 
+        font-size: 14px;
+        padding: 10px;
+    }
+    .account-settings{
+        margin-left: 3.8rem;
+        text-align: justify;
+    }
+    }
     </style>
- <div class="container">
-    <ol class="breadcrumb" style="background-color: white; font-size: 18px; margin-top: 4rem;">
+<div class="container">
+    <ol class="breadcrumb" >
         <li class="breadcrumb-item active" aria-current="page"><a href="{% url 'universystem:topics' %}" >Курс</a></li>
        <li class="breadcrumb-item"><a href="{% url 'universystem:profile' %}" >Жеке кабинет</a></li>
        <li class="breadcrumb-item"><a href="#" >Аккаунт баптаулары  </a></li>
-
-   
    </ol>
    <div class="container py-4 py-xl-5">
-    <div class="row gutters">
-    <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
-    <div class="card h-100">
-        <div class="card-body">
-            <div class="account-settings">
-                <div class="user-profile">
-                    <div class="user-avatar">
-                        <img src="{{user.profile.photo.url}}" alt="pfp" class="rounded-circle">
-                        <!-- <img src="{{user.profile.photo.url}}" alt="admin"> -->
+        <div class="container">
+            <div class="row gutters">
+                <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <div class="account-settings">
+                                <div class="user-profile">
+                                    <div class="user-avatar">
+                                        <img src="{{user.profile.photo.url}}" alt="pfp" class="rounded-circle">
+                                    </div>
+                                    <h5 class="user-name">Логин: {{ user.username }}</h5>
+                                    <h6 class="user-email">Эл.пошта: {{ user.email }}</h6>
+                                </div>
+                                <div class="about">
+                                    <h5>Регистрация күні:</h5>
+                                    <p>{{user.date_joined}}</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <h5 class="user-name"">Логин: {{ user.username }}</h5>
-                    <h6 class="user-email">Эл.пошта: {{ user.email }}</h6>
                 </div>
-                <div class="about">
-                    <h5>Регистрация күні:</h5>
-                    <p>{{user.date_joined}}</p>
+                <div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12">
+                     <div class="card h-100">
+                         <div class="card-body">
+                            <form action="" method="post" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                {% load widget_tweaks%}
+                                <fieldset class="form-group">
+                                    <div class="form-group mt-3">
+                                        <label><strong>Жаңа логин:</strong></label>
+                                        <div class="form-group" style="margin-left:2rem; width: 33rem;">
+                                            {{u_form.username}}
+                                        </div>
+                                    </div>
+                        
+                                    <div class="form-group mt-3">
+                                        <label><strong>Жаңа электронды пошта:</strong></label>
+                                        <div class="form-group" style="margin-left:2rem; width: 33rem;">
+                                            {{u_form.email}}
+                                        </div>
+                                    </div>
+                                    <div class="form-group mt-3">
+                                        <label><strong>Жаңа фото:</strong></label>
+                                        <div class="form-group" style="margin-left:2rem; width: 33rem;">
+                                            {{p_form}}
+                                        </div>
+                                    </div>
+                                </fieldset>
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-primary" style="margin-left:2rem; border-radius: 50px;  border: none; padding: 10px 30px;">Сақтау</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    </div>
-    <div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12">
-    <div class="card h-100">
-        <div class="card-body">
-            
-            <form action="" method="post" enctype="multipart/form-data">
-                {% csrf_token %}
-                {% load widget_tweaks%}
-                <fieldset class="form-group">
-                    <div class="form-group mt-3">
-                        <label><strong>Жаңа логин:</strong></label>
-                        <div class="form-group" style="margin-left:2rem; width: 33rem;">{{u_form.username}}
-                    </div></div>
-                    
-                    <div class="form-group mt-3">
-                        <label><strong>Жаңа электронды пошта:</strong></label>
-                        <div class="form-group" style="margin-left:2rem; width: 33rem;">{{u_form.email}}
-                    </div></div>
-                    <div class="form-group mt-3">
-                        <label><strong>Жаңа фото:</strong></label>
-                        <div class="form-group" style="margin-left:2rem; width: 33rem;">{{p_form}}
-                    </div></div>
-                    
-
-                </fieldset>
-                <div class="form-group">
-                    <button type="submit" class="btn btn-primary" style="margin-left:2rem; border-radius: 50px;  border: none; padding: 10px 30px;">Сақтау</button>
-                </div>
-            </form>
-
-        </div>
-    </div>
-    </div>
-    </div>
-    </div>
+</div>
  {% else %}
   <p>login to view</p>
 

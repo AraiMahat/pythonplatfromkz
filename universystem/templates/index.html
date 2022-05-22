@@ -54,7 +54,6 @@
                 <li><a href="#home-section" class="nav-link">Басты бет</a></li>
                 <li><a href="#programs-section" class="nav-link">Курс</a></li>
                 <li><a href="#courses-section" class="nav-link">Мазмұны</a></li>
-                <!-- <li><a href="#teachers-section" class="nav-link">Teachers</a></li> -->
               </ul>
             </nav>
           </div>
@@ -83,7 +82,6 @@
                 <div class="col-lg-6 mb-4">
                   <h1  data-aos="fade-up" data-aos-delay="100">Python</h1>
                   <p class="mb-4"  data-aos="fade-up" data-aos-delay="200" style="font-size: 30px;"> жылдам жұмыс істеуге және жүйелерді тиімдірек біріктіруге мүмкіндік беретін бағдарламалау тілі.</p>
-                  <!-- <p data-aos="fade-up" data-aos-delay="300"><a href="#" class="btn btn-primary py-3 px-5 btn-pill">Admission Now</a></p> -->
 
                 </div>
 
@@ -96,38 +94,25 @@
                       <label><strong>Қатысушы есіміңіз</strong></label>
                        <input type="text" name="username" placeholder="Username..." class="form-control">
                                                 
-                        <!-- <input type="text" class="form-control"  placeholder="Қатысушы есіміңіз" name="{{form.username.name}}"> -->
                     </div>
                     <div class="form-group mt-3">
                       <label><strong>Құпия сөз</strong></label>
                       <input type="password" name="password" placeholder="Password..." class="form-control" >
                                                 
-                        <!-- <input type="password" class="form-control" placeholder="Құпия сөз" name="{{form.password.name}}" placeholder="Password"> -->
                     </div>
                     
-                    <!-- <div class="form-group">
-                      {% if request.GET.next %}
-                         <input type="hidden" name="next" value="{{ request.GET.next }}">
-                      {% endif %}
-                          <input type="submit"   class="w-100 btn btn-primary btn-block" style="background-color: #7971ea; border: none;" value="Кіру">
-                                            
-                    </div> -->
+                   
                     {% if request.GET.next %}
                         <input type="hidden" name="next" value="{{ request.GET.next }}">
                     {% endif %}
                     <input type="submit"   class="w-100 btn btn-primary btn-block" style="background-color: #7971ea; border: none;" value="Кіру">
-                    <!-- <a href="{% url 'universystem:login' %}" class="btn btn-primary" style="border-radius: 50px;"><span>Кіру</span></a> -->
-
-                   <!-- <div class="new-account mt-3">
-                        <p> <a class="text-primary" style="font-size: 18px; font:bold;" href="{% url 'universystem:register' %}">
-                            Тіркелу</a></p>
-                    </div> -->
-                    
+                    <div class="form-group mt-3"> <a href="{% url 'universystem:register' %}" class="register"><span>Тіркелу</span></a>
+                    </div>
                   </form>
                    
 
                 </div>
-                <!--  -->
+                
               </div>
             </div>
             
@@ -135,19 +120,7 @@
         </div>
       </div>
     </div>
-<!-- 
-    <div class="container">
-      <form method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-         {{ form.as_p }}
-        <button type="submit">Upload</button>
-      </form>
-      
-      {% if img_obj %}
-        <h3>Succesfully uploaded : {{img_obj.title}}</h3>
-        <img src="{{ img_obj.image.url}}" alt="connect" style="max-height:300px">
-      {% endif %}
-    </div> --> 
+
     
 
     <div class="site-section" id="programs-section">
@@ -236,53 +209,7 @@
       </div>
     </div>
 
-   <!-- <div class="site-section" id="teachers-section">
-      <div class="container">
-
-        <div class="row mb-5 justify-content-center">
-          <div class="col-lg-7 mb-5 text-center"  data-aos="fade-up" data-aos-delay="">
-            <h2 class="section-title">Our Teachers</h2>
-            <p class="mb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magnam repellat aut neque! Doloribus sunt non aut reiciendis, vel recusandae obcaecati hic dicta repudiandae in quas quibusdam ullam, illum sed veniam!</p>
-          </div>
-        </div>
-
-        <div class="row">
-
-          <div class="col-md-6 col-lg-4 mb-4" data-aos="fade-up" data-aos-delay="100">
-            <div class="teacher text-center">
-              <img src="images/person_1.jpg" alt="Image" class="img-fluid w-50 rounded-circle mx-auto mb-4">
-              <div class="py-2">
-                <h3 class="text-black">Benjamin Stone</h3>
-                <p class="position">Physics Teacher</p>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Porro eius suscipit delectus enim iusto tempora, adipisci at provident.</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-md-6 col-lg-4 mb-4" data-aos="fade-up" data-aos-delay="200">
-            <div class="teacher text-center">
-              <img src="images/person_2.jpg" alt="Image" class="img-fluid w-50 rounded-circle mx-auto mb-4">
-              <div class="py-2">
-                <h3 class="text-black">Katleen Stone</h3>
-                <p class="position">Physics Teacher</p>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Porro eius suscipit delectus enim iusto tempora, adipisci at provident.</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-md-6 col-lg-4 mb-4" data-aos="fade-up" data-aos-delay="300">
-            <div class="teacher text-center">
-              <img src="images/person_3.jpg" alt="Image" class="img-fluid w-50 rounded-circle mx-auto mb-4">
-              <div class="py-2">
-                <h3 class="text-black">Sadie White</h3>
-                <p class="position">Physics Teacher</p>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Porro eius suscipit delectus enim iusto tempora, adipisci at provident.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>  -->
+  
 
 
     <div class="site-section courses-title" id="courses-section">
@@ -305,15 +232,11 @@
                 <a href="{% url 'universystem:login' %}"><img src="static/img/img_1_1.jpg" alt="Image" class="img-fluid"></a>
               </figure>
               <div class="course-inner-text py-4 px-4">
-                <!-- <span class="course-price">$20</span> -->
-                <!-- <div class="meta"><span class="icon-clock-o"></span>4 Lessons / 12 week</div> -->
+               
                 <h3><a href="{% url 'universystem:login' %}">Python тіліне кіріспе</a></h3>
                 <p>Питон деген не? Python не істей алады? Неліктен питон? </p>
               </div>
-              <div class="d-flex border-top stats">
-                <!-- <div class="py-3 px-4"><span class="icon-users"></span> 2,193 students</div>
-                <div class="py-3 px-4 w-25 ml-auto border-left"><span class="icon-chat"></span> 2</div> -->
-              </div>
+              
             </div>
 
             <div class="course bg-white h-100 align-self-stretch">
@@ -321,14 +244,12 @@
                 <a href="{% url 'universystem:login' %}"><img src="static/img/img_2_2.jpg" alt="Image" class="img-fluid"></a>
               </figure>
               <div class="course-inner-text py-4 px-4">
-                <!-- <span class="course-price">$99</span> -->
-                <!-- <div class="meta"><span class="icon-clock-o"></span>4 Lessons / 12 week</div> -->
+                
                 <h3><a href="{% url 'universystem:login' %}">Python негіздері</a></h3>
                 <p>Python Синтаксисі. Python-мен жұмыстың бастамасы.  Шегінісі</p>
               </div>
               <div class="d-flex border-top stats">
-                <!-- <div class="py-3 px-4"><span class="icon-users"></span> 2,193 students</div>
-                <div class="py-3 px-4 w-25 ml-auto border-left"><span class="icon-chat"></span> 2</div> -->
+                
               </div>
             </div>
 
@@ -337,14 +258,12 @@
                 <a href="{% url 'universystem:login' %}"><img src="static/img/img_3_3.jpg" alt="Image" class="img-fluid"></a>
               </figure>
               <div class="course-inner-text py-4 px-4">
-                <!-- <span class="course-price">$99</span> -->
-                <!-- <div class="meta"><span class="icon-clock-o"></span>4 Lessons / 12 week</div> -->
+                
                 <h3><a href="{% url 'universystem:login' %}">Python операторлары</a></h3>
                 <p>Aрифметикалық, тағайындау, салыстыру, логикалық операторлары</p>
               </div>
               <div class="d-flex border-top stats">
-                <!-- <div class="py-3 px-4"><span class="icon-users"></span> 2,193 students</div>
-                <div class="py-3 px-4 w-25 ml-auto border-left"><span class="icon-chat"></span> 2</div> -->
+               
               </div>
             </div>
 
@@ -356,13 +275,12 @@
               </figure>
               <div class="course-inner-text py-4 px-4">
                 
-                <!-- <div class="meta"><span class="icon-clock-o"></span>4 Lessons / 12 week</div> -->
+                
                 <h3><a href="{% url 'universystem:login' %}">Жолдар</a></h3>
                 <p>Көпжолды жолдар. Жолдарды форматтау. Format әдісі </p>
               </div>
               <div class="d-flex border-top stats">
-                <!-- <div class="py-3 px-4"><span class="icon-users"></span> 2,193 students</div>
-                <div class="py-3 px-4 w-25 ml-auto border-left"><span class="icon-chat"></span> 2</div> -->
+               
               </div>
             </div>
 
@@ -371,16 +289,14 @@
                 <a href="{% url 'universystem:login' %}"><img src="static/img/img_5_5.jpg" alt="Image" class="img-fluid"></a>
               </figure>
               <div class="course-inner-text py-4 px-4">
-                <!-- <span class="course-price">$99</span> -->
-                <!-- <div class="meta"><span class="icon-clock-o"></span>4 Lessons / 12 week</div> -->
+               
                 <h3><a href="{% url 'universystem:login' %}">Тізімдер</a></h3>
                 <p>Өзгеретін тізбектер - тізімдер
                   Тізімдерге қолданылатын амалдар
                   Массивтер</p>
               </div>
               <div class="d-flex border-top stats">
-                <!-- <div class="py-3 px-4"><span class="icon-users"></span> 2,193 students</div>
-                <div class="py-3 px-4 w-25 ml-auto border-left"><span class="icon-chat"></span> 2</div> -->
+               
               </div>
             </div>
 
@@ -389,14 +305,12 @@
                 <a href="{% url 'universystem:login' %}"><img src="static/img/img_6_6.jpeg" alt="Image" class="img-fluid"></a>
               </figure>
               <div class="course-inner-text py-4 px-4">
-                <!-- <span class="course-price">$99</span> -->
-                <!-- <div class="meta"><span class="icon-clock-o"></span>4 Lessons / 12 week</div> -->
+               
                 <h3><a href="{% url 'universystem:login' %}">Кортеж</a></h3>
                 <p>Кортежді жеке айнымалыларға жіліктеу. Кортеждерге қолданылатын амалдар</p>
               </div>
               <div class="d-flex border-top stats">
-                <!-- <div class="py-3 px-4"><span class="icon-users"></span> 2,193 students</div>
-                <div class="py-3 px-4 w-25 ml-auto border-left"><span class="icon-chat"></span> 2</div> -->
+                
               </div>
             </div>
 
@@ -405,14 +319,12 @@
                 <a href="{% url 'universystem:login' %}"><img src="static/img/img_7_7.jpg" alt="Image" class="img-fluid"></a>
               </figure>
               <div class="course-inner-text py-4 px-4">
-                <!-- <span class="course-price">$99</span> -->
-                <!-- <div class="meta"><span class="icon-clock-o"></span>4 Lessons / 12 week</div> -->
+               
                 <h3><a href="{% url 'universystem:login' %}">Функция. Рекурсия</a></h3>
-                <p>Функция. Рекурсия</p>
+                <p>Функция, сипатталуы. Параметрлерінің берілу механизмі. lambda-функциялар</p>
               </div>
               <div class="d-flex border-top stats">
-                <!-- <div class="py-3 px-4"><span class="icon-users"></span> 2,193 students</div>
-                <div class="py-3 px-4 w-25 ml-auto border-left"><span class="icon-chat"></span> 2</div> -->
+               
               </div>
             </div>
 
@@ -421,14 +333,12 @@
                 <a href="{% url 'universystem:login' %}"><img src="static/img/img_8_8.jpg" alt="Image" class="img-fluid"></a>
               </figure>
               <div class="course-inner-text py-4 px-4">
-                <!-- <span class="course-price">$99</span> -->
-                <!-- <div class="meta"><span class="icon-clock-o"></span>4 Lessons / 12 week</div> -->
+                
                 <h3><a href="{% url 'universystem:login' %}">Жиындар</a></h3>
-                <p>Жиындар</p>
+                <p>Жиындарға қолданылатын амалдар. Frozenset функциясы</p>
               </div>
               <div class="d-flex border-top stats">
-                <!-- <div class="py-3 px-4"><span class="icon-users"></span> 2,193 students</div>
-                <div class="py-3 px-4 w-25 ml-auto border-left"><span class="icon-chat"></span> 2</div> -->
+               
               </div>
             </div>
 
@@ -437,14 +347,12 @@
                 <a href="{% url 'universystem:login' %}"><img src="static/img/img_9_9.jpg" alt="Image" class="img-fluid"></a>
               </figure>
               <div class="course-inner-text py-4 px-4">
-                <!-- <span class="course-price">$99</span> -->
-                <!-- <div class="meta"><span class="icon-clock-o"></span>4 Lessons / 12 week</div> -->
+               
                 <h3><a href="{% url 'universystem:login' %}">Сөздіктер түсінігі және құру принциптері</a></h3>
-                <p>Сөздіктер түсінігі және құру принциптері</p>
+                <p>Сөздіктер тізімі. МҚ-да сөздіктер сөздігін құру</p>
               </div>
               <div class="d-flex border-top stats">
-                <!-- <div class="py-3 px-4"><span class="icon-users"></span> 2,193 students</div>
-                <div class="py-3 px-4 w-25 ml-auto border-left"><span class="icon-chat"></span> 2</div> -->
+              
               </div>
             </div>
 
@@ -453,15 +361,11 @@
                 <a href="{% url 'universystem:login' %}"><img src="static/img/img_10_10.jpg" alt="Image" class="img-fluid"></a>
               </figure>
               <div class="course-inner-text py-4 px-4">
-                <!-- <span class="course-price">$99</span> -->
-                <!-- <div class="meta"><span class="icon-clock-o"></span>4 Lessons / 12 week</div> -->
+              
                 <h3><a href="{% url 'universystem:login' %}">Файлдармен мәлімет алмасу мүмкіндіктері</a></h3>
-                <p>Файлдармен мәлімет алмасу мүмкіндіктері</p>
+                <p>Файлдармен мәлімет алмасу тәсілдері. Файлдармен байланыс орнату, сипатталуы мен қолданылу амалдары</p>
               </div>
-              <div class="d-flex border-top stats">
-                <!-- <div class="py-3 px-4"><span class="icon-users"></span> 2,193 students</div>
-                <div class="py-3 px-4 w-25 ml-auto border-left"><span class="icon-chat"></span> 2</div> -->
-              </div>
+             
             </div>
 
             <div class="course bg-white h-100 align-self-stretch">
@@ -469,15 +373,11 @@
                 <a href="{% url 'universystem:login' %}"><img src="static/img/img_11_11.jpg" alt="Image" class="img-fluid"></a>
               </figure>
               <div class="course-inner-text py-4 px-4">
-                <!-- <span class="course-price">$99</span> -->
-                <!-- <div class="meta"><span class="icon-clock-o"></span>4 Lessons / 12 week</div> -->
+               
                 <h3><a href="{% url 'universystem:login' %}">Модульдер</a></h3>
-                <p>Модульдер</p>
+                <p>Модуль түсінігі. Қолданушы модулінің құрылымы мен жүзеге асырылуы</p>
               </div>
-              <div class="d-flex border-top stats">
-                <!-- <div class="py-3 px-4"><span class="icon-users"></span> 2,193 students</div>
-                <div class="py-3 px-4 w-25 ml-auto border-left"><span class="icon-chat"></span> 2</div> -->
-              </div>
+              
             </div>
 
             <div class="course bg-white h-100 align-self-stretch">
@@ -485,15 +385,11 @@
                 <a href="{% url 'universystem:login' %}"><img src="static/img/img_12_12.png" alt="Image" class="img-fluid"></a>
               </figure>
               <div class="course-inner-text py-4 px-4">
-                <!-- <span class="course-price">$99</span> -->
-                <!-- <div class="meta"><span class="icon-clock-o"></span>4 Lessons / 12 week</div> -->
+               
                 <h3><a href="{% url 'universystem:login' %}">Ерекше оқиғалар. Объектілі-бағытталған программалауға кіріспе</a></h3>
-                <p>Ерекше оқиғалар. Объектілі-бағытталған программалауға кіріспе</p>
+                <p>Қателерді талдау, ерекше оқиғаларды өңдеу. Ерекше оқиғалар түрлері мен өңдеу құралдары. ОБП негіздері мен мүмкіндіктері</p>
               </div>
-              <div class="d-flex border-top stats">
-                <!-- <div class="py-3 px-4"><span class="icon-users"></span> 2,193 students</div>
-                <div class="py-3 px-4 w-25 ml-auto border-left"><span class="icon-chat"></span> 2</div> -->
-              </div>
+              
             </div>
 
             <div class="course bg-white h-100 align-self-stretch">
@@ -501,15 +397,11 @@
                 <a href="{% url 'universystem:login' %}"><img src="static/img/img_13_13.jpg" alt="Image" class="img-fluid"></a>
               </figure>
               <div class="course-inner-text py-4 px-4">
-                <!-- <span class="course-price">$99</span> -->
-                <!-- <div class="meta"><span class="icon-clock-o"></span>4 Lessons / 12 week</div> -->
+                
                 <h3><a href="{% url 'universystem:login' %}">GUI қосымша құру кезеңдері</a></h3>
-                <p>GUI қосымша құру кезеңдері</p>
+                <p>GUI - қолданушының графиктік интерфейсі программалау. Tkinter кітапханасын қосу</p>
               </div>
-              <div class="d-flex border-top stats">
-                <!-- <div class="py-3 px-4"><span class="icon-users"></span> 2,193 students</div>
-                <div class="py-3 px-4 w-25 ml-auto border-left"><span class="icon-chat"></span> 2</div> -->
-              </div>
+             
             </div>
 
             
@@ -603,7 +495,6 @@
 
             
             <h2 class="section-title mb-3">Пікір қалдыру</h2>
-            <!-- <p class="mb-5">Natus totam voluptatibus animi aspernatur ducimus quas obcaecati mollitia quibusdam temporibus culpa dolore molestias blanditiis consequuntur sunt nisi.</p> -->
           
             <form method="post" >
               {% csrf_token %}
@@ -656,33 +547,23 @@
           <div class="col-md-3 ml-auto">
             <h3>Сілтемелер</h3>
             <ul class="list-unstyled footer-links">
-              <li><a href="#">Басты бет</a></li>
-              <li><a href="#">Курс</a></li>
-              <!-- <li><a href="#">Programs</a></li>
-              <li><a href="#">Teachers</a></li> -->
+              <li><a href="#home-section" class="nav-link">Басты бет</a></li>
+              <li><a href="#programs-section" class="nav-link">Курс</a></li>
+              <li><a href="#courses-section" class="nav-link">Мазмұны</a></li>
+              
             </ul>
           </div>
 
-          <!-- <div class="col-md-4">
-            <h3>Subscribe</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nesciunt incidunt iure iusto architecto? Numquam, natus?</p>
-            <form action="#" class="footer-subscribe">
-              <div class="d-flex mb-5">
-                <input type="text" class="form-control rounded-0" placeholder="Email">
-                <input type="submit" class="btn btn-primary rounded-0" value="Subscribe">
-              </div>
-            </form>
-          </div> -->
-
+          
         </div>
 
         <div class="row pt-5 mt-5 text-center">
           <div class="col-md-12">
             <div class="border-top pt-5">
             <p>
-        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+        
         Copyright &copy;<script>document.write(new Date().getFullYear());</script> 
-        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+       
       </p>
             </div>
           </div>
