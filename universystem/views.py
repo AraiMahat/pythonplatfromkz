@@ -11,16 +11,19 @@ from multiprocessing import context
 from django.shortcuts import get_object_or_404, render, redirect
 from django.views.generic.base import TemplateResponseMixin,View
 from requests import request
-
+from django.template.loader import render_to_string
 from .forms import UserUpdateForm, ProfileUpdateForm, CreateUserForm, UserRegistrationForm, ProfileForm, LecturesForm, LecturesTextForm, ImageForm
 from .models import Answer, Question, Result, Topics, User, Quiz, Chapters, Profile,Lectures,Lectures_text,EnrollCource, Image, Article
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.tokens import default_token_generator as token_generator
+
 from django.contrib import messages
 from django.db.models import Q
 from django.views.generic import ListView
 from django.core.mail import send_mail
 from django.conf import settings
+from .forms import CustomUserCreationForm 
 
 class QuizListView(ListView):
     model = Quiz
@@ -134,6 +137,24 @@ def loginView(request):
     return render(request, "registration/login.html", context)
 
 def register(request):
+
+    # if request.POST == 'POST': 
+    #     form = CustomUserCreationForm() 
+    #     if form.is_valid(): 
+    #         form.save() 
+    #         email = form.cleaned_data.get('email')
+    #         password = form.cleaned_data.get('password1')
+    #         user = authenticate(email=email, password=password)
+    #         messages.success(request, 'Account created successfully') 
+    #         send_mail_after_register(request, user)
+    #         return redirect('/register/token')
+            
+    # else: 
+    #     form = CustomUserCreationForm() 
+    # context = { 
+    #     'form':form 
+    # } 
+
     if request.method == 'POST':
 
         username = request.POST.get('username')
@@ -151,7 +172,7 @@ def register(request):
         if User.objects.filter(email = email).first():
             messages.success(request, 'email is taken')
             return redirect('/register')
-        
+    
         user_obj = User.objects.create(username=username, email=email)
         user_obj.set_password(password1)
         user_obj.save()
@@ -212,7 +233,22 @@ def verify(request, auth_token):
     except Exception as e:
         print(e)
 
+# def send_mail_after_register(request, user):
+#     context = {
+#         'user': user,
+#         'token': token_generator.make_token(user),
+#         }
+#     message = render_to_string(
+#         template_name='registration/verify.html',
+#         context=context
+#     )
+#     email = message.EmailMessage(
+#         'Verify Email',
+#         message,
+#         to =[user.email],
 
+#     )
+#     email.send()
 
 def send_mail_after_register(email, auth_token):
     subject = 'Аккаунт верификациясы'

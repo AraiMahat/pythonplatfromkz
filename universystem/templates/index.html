@@ -81,7 +81,7 @@
               <div class="row align-items-center">
                 <div class="col-lg-6 mb-4">
                   <h1  data-aos="fade-up" data-aos-delay="100">Python</h1>
-                  <p class="mb-4"  data-aos="fade-up" data-aos-delay="200" style="font-size: 30px;"> жылдам жұмыс істеуге және жүйелерді тиімдірек біріктіруге мүмкіндік беретін бағдарламалау тілі.</p>
+                  <p class="mb-4" id="p" data-aos="fade-up" data-aos-delay="200"> жылдам жұмыс істеуге және жүйелерді тиімдірек біріктіруге мүмкіндік беретін бағдарламалау тілі.</p>
 
                 </div>
 
@@ -222,7 +222,7 @@
       </div>
     </div>
     <div class="site-section courses-entry-wrap"  data-aos="fade-up" data-aos-delay="100">
-      <div class="container">
+      <div class="container" style="margin-top:-6rem;">
         <div class="row">
 
           <div class="owl-carousel col-12 nonloop-block-14">
@@ -411,7 +411,7 @@
 
         </div>
         <div class="row justify-content-center">
-          <div class="col-7 text-center">
+          <div class="col-7 text-center" id="buttons">
             <button class="customPrevBtn btn btn-primary m-1">Артқа</button>
             <button class="customNextBtn btn btn-primary m-1">Келесі</button>
           </div>
@@ -573,7 +573,22 @@
     </footer>
 
   
-    
+    <style>
+      
+#p{
+  font-size: 30px;
+}
+@media all and (max-width: 1400px){
+
+body{
+ box-sizing: border-box; 
+}
+#p{
+  font-size: 20px;
+} 
+}
+
+    </style>
   </div> <!-- .site-wrap -->
 
   <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>

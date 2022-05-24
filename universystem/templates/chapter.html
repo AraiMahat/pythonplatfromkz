@@ -236,7 +236,7 @@ text-decoration: none;
 }
 
 #compiler {
-  top: 520px;
+  top: 200px;
   background-color: #7971ea;
 }
 
@@ -244,6 +244,39 @@ text-decoration: none;
   #code {
     margin: 30px;
   }
+
+  @media all and (max-width: 767px){
+    #mySidenav a {
+  position: absolute;
+  right: -40px;
+  transition: 0.3s;
+  padding: 15px;
+  width: 165px;
+  text-decoration: none;
+  font-size: 16px;
+  color: white;
+  border-radius: 5px  0  0 5px ;
+}
+  }
+
+  @media all and (max-width: 695px){
+    #mySidenav a {
+  position: absolute;
+  right: -40px;
+  transition: 0.3s;
+  padding: 10px;
+  width: 140px;
+  text-decoration: none;
+  font-size: 14px;
+  color: white;
+  border-radius: 5px  0  0 5px ;
+}
+#compiler {
+  top: 180px;
+  background-color: #7971ea;
+}
+  }
+
   @media all and (max-width: 500px){
     .breadcrumb{
       margin-top: -0.5rem;
@@ -264,5 +297,10 @@ text-decoration: none;
     margin:-1rem 0;
     font-size: 18px;
   }
+  
+  #compiler {
+  top: 180px;
+  background-color: #7971ea;
+}
   </style>
 {% endblock %}  

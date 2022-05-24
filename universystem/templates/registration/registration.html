@@ -14,7 +14,7 @@
                     <div class="row no-gutters">
                         <div class="col-xl-12">
                             <div class="auth-form">
-                                <div class="card" style="width: 40rem; box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;">
+                                <div class="card" >
                                     <div class="card-body" style="margin: 40px 30px;">
                                 <h4 class="text-center mb-4"  >Тіркелу</h4>
                                 
@@ -29,27 +29,33 @@
                                         </div>
                                         {% endfor %}
                                     {% endif %}
+                                        
+
+
                                         <div class="form-group mt-3">
                                             <label><strong>Логин:</strong></label>
-                                            <input type="text" name="username" placeholder="Username..." class="form-control">
+                                            <input type="text" name="username" placeholder="Username..." class="form-control" required aria-required="true">
                                         </div>
                                         <div class="form-group mt-3">
                                             <label><strong>Құпия сөз:</strong></label>
-                                            <input type="password" name="password1" placeholder="Password..." class="form-control" >
+                                            <input type="password" name="password1" placeholder="Password..." class="form-control" required aria-required="true">
                                         </div>
                                         <div class="form-group mt-3">
                                             <label><strong>Құпия сөзді құптаңыз:</strong></label>
-                                            <input type="password" name="password2" placeholder="Password..." class="form-control" >
+                                            <input type="password" name="password2" placeholder="Password..." class="form-control" required aria-required="true">
                                         </div>
                                         <div class="form-group mt-3">
                                             <label><strong>Эл. пошта:</strong></label>
-                                            <input type="email" name="email" placeholder="Email..." class="form-control" >
+                                            <input type="email" name="email" placeholder="Email..." class="form-control" required aria-required="true">
                                         </div>
                                        
                                         <div class="mt-3 text-center">
                                             
                                             <input type="submit"   class="w-100 btn btn-primary btn-block" style="background-color: #7971ea; border: none;" value="Кіру">
                                         </div>
+
+
+
                                   
                                     <!-- <div class="form-group">
                                         
@@ -132,6 +138,41 @@ a:active {
   color: red;
   background-color: transparent;
   text-decoration: underline;
+}
+.card{
+    width: 40rem; 
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, 
+    rgba(0, 0, 0, 0.12) 0px -12px 30px, 
+    rgba(0, 0, 0, 0.12) 0px 4px 6px, 
+    rgba(0, 0, 0, 0.17) 0px 12px 13px,
+     rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+
+
+@media all and (max-width: 1200px){
+
+.card{
+
+    width:600px;
+    margin: auto;
+}
+
+}
+@media all and (max-width: 950px){
+
+    .card{
+
+        width:500px;
+        margin: auto;
+    }
+    
+}
+
+
+@media all and (max-width: 500px){
+    .card{
+        width: 390px;
+    }
 }
 </style>
 {% endblock %}
