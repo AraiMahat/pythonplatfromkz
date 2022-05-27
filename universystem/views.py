@@ -23,7 +23,7 @@ from django.db.models import Q
 from django.views.generic import ListView
 from django.core.mail import send_mail
 from django.conf import settings
-from .forms import CustomUserCreationForm 
+from .forms import CustomUserCreationForm
 
 
 class QuizListView(ListView):
@@ -74,21 +74,21 @@ def save_quiz_view(request, pk):
 
         for q in questions:
             a_selected = request.POST.get(q.text)
-            
+
             if a_selected != "":
                 question_answers = Answer.objects.filter(question=q)
                 for a in question_answers:
                     if a_selected == a.text:
                         if a.correct:
                             score += 1
-                            correct_answer = a.text 
+                            correct_answer = a.text
                     else:
                         if a.correct:
                             correct_answer = a.text
                 results.append({str(q):{'correct_answer': correct_answer, 'answered': a_selected}})
             else:
                 results.append({str(q):'not answered'})
-        
+
         score_ = score * multiplier
         Result.objects.create(quiz=quiz, user=user, score=score_)
 
@@ -105,7 +105,7 @@ def loginView(request):
         if user_obj is None:
             messages.success(request, 'Логин табылмады...')
             return redirect('/login')
-        
+
         profile_obj = Profile.objects.filter(user = user_obj).first()
 
         if not profile_obj.is_verified:
@@ -130,7 +130,7 @@ def loginView(request):
         #         return redirect(request.POST.get('next'))
         #     else:
         #         return redirect('topics')
-            
+
         # else:
         #     messages.info(request, 'username incorrect')
 
@@ -140,22 +140,22 @@ def loginView(request):
 
 def register(request):
 
-    # if request.POST == 'POST': 
-    #     form = CustomUserCreationForm() 
-    #     if form.is_valid(): 
-    #         form.save() 
+    # if request.POST == 'POST':
+    #     form = CustomUserCreationForm()
+    #     if form.is_valid():
+    #         form.save()
     #         email = form.cleaned_data.get('email')
     #         password = form.cleaned_data.get('password1')
     #         user = authenticate(email=email, password=password)
-    #         messages.success(request, 'Account created successfully') 
+    #         messages.success(request, 'Account created successfully')
     #         send_mail_after_register(request, user)
     #         return redirect('/register/token')
-            
-    # else: 
-    #     form = CustomUserCreationForm() 
-    # context = { 
-    #     'form':form 
-    # } 
+
+    # else:
+    #     form = CustomUserCreationForm()
+    # context = {
+    #     'form':form
+    # }
 
     if request.method == 'POST':
 
@@ -174,7 +174,7 @@ def register(request):
         if User.objects.filter(email = email).first():
             messages.success(request, 'эл.пошта бос емес')
             return redirect('/register')
-    
+
         user_obj = User.objects.create(username=username, email=email)
         user_obj.set_password(password1)
         user_obj.save()
@@ -193,7 +193,7 @@ def register(request):
 
 
     # form = CreateUserForm()
-    # if request.method == "POST":      
+    # if request.method == "POST":
     #     form = CreateUserForm(request.POST)
     #     if form.is_valid():
     #         form.save()
@@ -203,7 +203,7 @@ def register(request):
     # else:
     #     form = CreateUserForm()
     # context = {"form": form}
-    
+
     return render(request, "registration/registration.html")
 
 def success(request):
@@ -211,14 +211,14 @@ def success(request):
 
 def token_send(request):
     return render(request, 'registration/token_send.html')
-    
+
 def error(request):
     return render(request, 'registration/error.html')
 
 def verify(request, auth_token):
     try:
         profile_obj = Profile.objects.filter(auth_token = auth_token).first()
-        
+
         if profile_obj:
             if profile_obj.is_verified:
                 messages.success(request, 'Аккаунт тексеруден өтті!')
@@ -261,7 +261,7 @@ def send_mail_after_register(email, auth_token):
 
 
 
-# @login_required(login_url="/login/")
+@login_required(login_url="/login/")
 def view_profile(request):
     result = Result.objects.filter(user=request.user)
     context = {
@@ -270,7 +270,7 @@ def view_profile(request):
     }
     return render(request, 'ProfileView.html', context)
 
-# @login_required(login_url="/login/")
+@login_required(login_url="/login/")
 def edit_profile(request):
     if request.method == 'POST':
         u_form = UserUpdateForm(request.POST, instance=request.user)
@@ -301,18 +301,18 @@ def runcode(request):
 def homepage(request):
 
     if request.method == 'POST':
-       
+
         name = request.POST.get('name')
         subject = request.POST.get('subject')
         email = request.POST.get('email')
         message = request.POST.get('message')
 
-        
+
         from_email = settings.EMAIL_HOST_USER
         to_email = [from_email , 'pythonplatformkz@gmail.com']
         contact_message = "%s: %s via %s" % (
-            name , 
-            message , 
+            name ,
+            message ,
             email)
 
         if subject:
@@ -324,8 +324,8 @@ def homepage(request):
                 to_email,
                 fail_silently=False,
             )
-    
-    
+
+
         username = request.POST.get('username')
         password = request.POST.get('password')
         user = authenticate(request, username = username, password=password)
@@ -335,14 +335,14 @@ def homepage(request):
                 return redirect(request.POST.get('next'))
             else:
                 return redirect('universystem:topics')
-            
+
         else:
             messages.info(request, 'Қате логин терілді...')
 
 
     context = {}
-    
-    
+
+
     return render(request, 'index.html',context)
 
 
@@ -375,7 +375,7 @@ def search_venues(request):
     if request.method == 'POST':
         searched = request.POST['searched']
         articles = Article.objects.filter(
-            Q(title__icontains=searched) | 
+            Q(title__icontains=searched) |
             Q(topic1=searched) |
             Q(topic2=searched) |
             Q(topic3=searched) |
@@ -401,7 +401,7 @@ def topics(request):
 def chapters(request):     # form = ChaptersForm()
     # chapters = Chapters.objects.filter(user=request.user)
     chapters = Chapters.objects.all()
-    
+
     return render(request, "home.html")
 
 def post_detail(request, slug):
