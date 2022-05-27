@@ -11,8 +11,9 @@ from django.forms import SlugField
 from django.urls import reverse
 from ckeditor.fields import RichTextField
 from ckeditor_uploader.fields import RichTextUploadingField
-import random
-from PIL import Image, ImageOps
+import random, os
+from PIL import Image as Image
+from django.conf import settings
 
 class Quiz(models.Model):
     name = models.CharField(max_length=120)
@@ -69,6 +70,14 @@ class Result(models.Model):
         verbose_name = 'Результаты'
         verbose_name_plural = 'Результаты'
 
+def user_directory_path(instance, filename):
+    profile_pic_name = 'user_{0}/profile.jpg'.format(instance.user.id)
+    full_path = os.path.join(settings.MEDIA_ROOT, profile_pic_name)
+
+    if os.path.exists(full_path):
+        os.remove(full_path)
+
+    return profile_pic_name
        
 class Profile(models.Model):
     photo = models.ImageField(default='images/profile/pfp.png', upload_to='images/profile', null=True)
@@ -86,6 +95,13 @@ class Profile(models.Model):
     
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
+
+        # size = 300, 300
+
+        # if self.photo:
+        #     pic = Image.open(self.photo.path)
+        #     pic.thubmnail(size, Image.LANCZOS)
+        #     pic.save(self.photo.path)
 
         # img = Image.open(self.photo.path)
 

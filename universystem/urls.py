@@ -2,7 +2,8 @@ from django.urls import path
 from . import views
 from django.contrib.auth import views as auth_views
 from django.conf import settings
-from django.conf.urls.static import static 
+from django.conf.urls.static import static
+from django.contrib.auth.decorators import login_required 
 app_name = 'universystem'
 
 urlpatterns =[
@@ -12,7 +13,8 @@ urlpatterns =[
 	path('register/token',views.token_send,name='token_send'),
 	path('register/verify/<auth_token>',views.verify,name='verify'),
 	path('register/error',views.error,name='error'),
-	path('login/',auth_views.LoginView.as_view(),name='login'),
+	# path('login/',auth_views.LoginView.as_view(),name='login'),
+	path('login/',views.loginView,name='login'),
 	path('logout/',auth_views.LogoutView.as_view(),name='logout'),
 	path('profile/',views.view_profile, name='profile'),
 	path('topics/',views.topics, name='topics'),
@@ -20,7 +22,7 @@ urlpatterns =[
 	path('lesson/<slug:slug>/', views.post_detail, name='post_detail'),
 	path('runcode/', views.runcode, name="runcode"),
 	path('search/', views.search_venues, name="search"),
-	path('quiz/', views.QuizListView.as_view(), name="main-quiz"),
+	path('quiz/', login_required(views.QuizListView.as_view()), name="main-quiz"),
 	path('quiz/<int:pk>/', views.quiz_view, name="quiz-view"),
 	path('quiz/<int:pk>/save/', views.save_quiz_view, name="save-view"),
 	path('quiz/<int:pk>/data/', views.quiz_data_view, name="quiz-data-view"),

@@ -1,4 +1,6 @@
-{% extends 'base.html' %}
+
+
+ {% extends 'base.html' %}
 
 
 {% load static %}
@@ -34,33 +36,48 @@
         background-color: #7971ea;
     }
     .user-avatar{
+        margin-top: 1rem;
         border-radius: 50%;
         width: 200px;
         height: 120px;
         margin-left: 2rem;
+        display: block;
+    margin: 0 auto;
     }
     img{
         border-radius: 50%;
         width: 100%;
         height: auto;
-    }
-    label{
-        margin-left: 3rem;
-    }
-    .user-name{
-        margin-top: 1rem;
-    }
-    .about{
-        margin-top: -4rem;
+        width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  margin: 20px;
+
+  object-fit: cover;
+  object-position: center right;
     }
     
+    .user-avatar{
+        width: 180px;
+        height: 180px;
+    }
+   
+    #account{
+        border-radius: 50px;
+        border: none; 
+        padding: 10px;
+    }
     .breadcrumb{
         background-color: white; 
         font-size: 18px; 
         margin-top: 4rem;
 
     }
-    
+    .user-name{
+        padding-top: 30px;
+    }
+
+
     @media all and (max-width: 1400px){
         .breadcrumb{
         background-color: white; 
@@ -72,16 +89,14 @@
         .user-avatar{
         width: 150px;
         height: 150px;
+        display: block;
+    margin: 0 auto;
     }
     .about h5{
         font-size: 16px;
     }
     .about p{
         font-size: 14px;
-    }
-    .user-profile{
-        width: 300px;
-        height: 300px;
     }
     }
     @media all and (max-width: 1200px){
@@ -95,13 +110,12 @@
         .user-avatar{
         width: 120px;
         height: 120px;
+        display: block;
+    margin: 0 auto;
     }
     .user-name{
-        margin-top: 1rem;
+        margin-top: -1rem;
         font-size: 16px;
-    }
-    .about{
-        margin-top: -6rem;
     }
     .about h5{
         font-size: 16px;
@@ -111,32 +125,20 @@
     }
     }
     @media all and (max-width: 995px){
-        .breadcrumb{
-        background-color: white; 
-        font-size: 16px; 
-        margin-top: 1.5rem;
-
-    }
         .account-settings{
         text-align: center;
         
     }
-    .user-profile{
-        text-align: center;
-    }
-    .user-avatar{
+    img{
         width: 120px;
         height: 120px;
         display: block;
-        margin: 0 auto;
+    margin: 0 auto;
     }
     }
 
 
     @media all and (max-width: 500px){
-        .form-group{
-            margin-left: -1rem;
-        }
         .breadcrumb{
         background-color: white; 
         font-size: 14px; 
@@ -146,21 +148,20 @@
     .user-profile{
         width: 300px;
         height: 300px;
-        text-align: justify;
     }
     .user-avatar{
         width: 100px;
         height: 100px;
         margin-left: 2rem;
+        
     }
     
     .user-name{   
         margin-top: 1rem;
-        
         font-size: 18px;
     }
     .about{
-        margin-top: -8rem;
+        margin-top: -5rem;
     }
     .about h5{
         font-size: 16px;
@@ -180,66 +181,92 @@
     }
     }
     </style>
-<div class="container">
-    <ol class="breadcrumb" >
+ <div class="container">
+    <ol class="breadcrumb">
         <li class="breadcrumb-item active" aria-current="page"><a href="{% url 'universystem:topics' %}" >Курс</a></li>
        <li class="breadcrumb-item"><a href="{% url 'universystem:profile' %}" >Жеке кабинет</a></li>
-       <li class="breadcrumb-item"><a href="#" >Аккаунт баптаулары  </a></li>
+       <li class="breadcrumb-item"><a href="{% url 'universystem:edit_profile' %}" >Аккаунт баптаулары</a></li>
+
+   
    </ol>
-   <div class="container py-4 py-xl-5">
-        <div class="container">
+
+   
+<div class="container py-4 py-xl-5" id="section-1"><div class="container">
+
+    <div class="row gutters">
+    <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
+    <div class="card h-100">
+        <div class="card-body">
+            <div class="account-settings">
+                <div class="user-profile">
+                    <div class="user-avatar">
+                        <img src="{{user.profile.photo.url}}"  id="pfp" alt="profilephoto" class="rounded-circle">
+                    </div>
+                    <h5 class="user-name">Тіркелгі аты: {{ user.username }}</h5>
+                    <h6 class="user-email">Эл.пошта: {{ user.email }}</h6>
+                </div>
+                <div class="about" >
+                    <h5>Регистрация күні:</h5>
+                    <p>{{user.date_joined}}</p>
+                </div>
+                <!-- <a href="{% url 'universystem:edit_profile' %}" class="btn btn-primary" id="account">Аккаунт баптаулары</a> -->
+                {% if messages %}
+                {% for message in messages %}   
+                <div class="alert alert-info">
+                    {{message}}
+                </div>
+                {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    </div>
+    <div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12">
+    <div class="card h-100">
+        <div class="card-body">
             <div class="row gutters">
-                <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
-                    <div class="card h-100">
-                        <div class="card-body">
-                            <div class="account-settings">
-                                <div class="user-profile">
-                                    <div class="user-avatar">
-                                        <img src="{{user.profile.photo.url}}" alt="pfp" class="rounded-circle">
-                                    </div>
-                                    <h5 class="user-name">Логин: {{ user.username }}</h5>
-                                    <h6 class="user-email">Эл.пошта: {{ user.email }}</h6>
-                                </div>
-                                <div class="about">
-                                    <h5>Регистрация күні:</h5>
-                                    <p>{{user.date_joined}}</p>
+                <!-- <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                    <h6 class="mb-2 text-primary" style="color: #7971ea;">Қаралған тақырыптар: </h6>
+                </div> -->
+               
+            </div>
+            <div class="row gutters">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                    <form action="" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {% load widget_tweaks%}
+                        <fieldset class="form-group" style="margin-left:2rem;">
+                            <div class="form-group mt-3">
+                                <label><strong>Жаңа логин:</strong></label>
+                                <div class="form-group" style=" width: 33rem;">
+                                    {{u_form.username}}
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12">
-                     <div class="card h-100">
-                         <div class="card-body">
-                            <form action="" method="post" enctype="multipart/form-data">
-                                {% csrf_token %}
-                                {% load widget_tweaks%}
-                                <fieldset class="form-group">
-                                    <div class="form-group mt-3">
-                                        <label><strong>Жаңа логин:</strong></label>
-                                        <div class="form-group" style="margin-left:2rem; width: 33rem;">
-                                            {{u_form.username}}
-                                        </div>
-                                    </div>
-                        
-                                    <div class="form-group mt-3">
-                                        <label><strong>Жаңа электронды пошта:</strong></label>
-                                        <div class="form-group" style="margin-left:2rem; width: 33rem;">
-                                            {{u_form.email}}
-                                        </div>
-                                    </div>
-                                    <div class="form-group mt-3">
-                                        <label><strong>Жаңа фото:</strong></label>
-                                        <div class="form-group" style="margin-left:2rem; width: 33rem;">
-                                            {{p_form}}
-                                        </div>
-                                    </div>
-                                </fieldset>
-                                <div class="form-group">
-                                    <button type="submit" class="btn btn-primary" style="margin-left:2rem; border-radius: 50px;  border: none; padding: 10px 30px;">Сақтау</button>
+                
+                            <div class="form-group mt-3">
+                                <label><strong>Жаңа электронды пошта:</strong></label>
+                                <div class="form-group" style=" width: 33rem;">
+                                    {{u_form.email}}
                                 </div>
-                            </form>
+                            </div>
+                            <div class="form-group mt-3">
+                                <label><strong>Жаңа фото:</strong></label>
+                                <div class="form-group" style=" width: 33rem;">
+                                    {{p_form}}
+                                </div>
+                            </div>
+                        </fieldset>
+                        <div class="form-group" style="margin-left:2rem;">
+                            <button type="submit" class="btn btn-primary" style=" border-radius: 50px;  border: none; padding: 10px 30px;">Сақтау</button>
                         </div>
+                    </form>
+                </div>
+                
+            </div>
+            <div class="row gutters">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                    <div class="text-right">
+                        <!-- <button type="button" id="submit" name="submit" class="btn btn-secondary">Cancel</button> -->
                     </div>
                 </div>
             </div>

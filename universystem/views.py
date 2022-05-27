@@ -17,7 +17,7 @@ from .models import Answer, Question, Result, Topics, User, Quiz, Chapters, Prof
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.tokens import default_token_generator as token_generator
-
+from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.db.models import Q
 from django.views.generic import ListView
@@ -25,9 +25,11 @@ from django.core.mail import send_mail
 from django.conf import settings
 from .forms import CustomUserCreationForm 
 
+
 class QuizListView(ListView):
     model = Quiz
     template_name = "quiz_main.html"
+
 
 def quiz_view(request, pk):
     quiz = Quiz.objects.get(pk=pk)
@@ -166,11 +168,11 @@ def register(request):
     try:
 
         if User.objects.filter(username = username).first():
-            messages.success(request, 'username is taken')
+            messages.success(request, 'логин бос емес')
             return redirect('/register')
 
         if User.objects.filter(email = email).first():
-            messages.success(request, 'email is taken')
+            messages.success(request, 'эл.пошта бос емес')
             return redirect('/register')
     
         user_obj = User.objects.create(username=username, email=email)
@@ -259,7 +261,7 @@ def send_mail_after_register(email, auth_token):
 
 
 
-
+# @login_required(login_url="/login/")
 def view_profile(request):
     result = Result.objects.filter(user=request.user)
     context = {
@@ -268,6 +270,7 @@ def view_profile(request):
     }
     return render(request, 'ProfileView.html', context)
 
+# @login_required(login_url="/login/")
 def edit_profile(request):
     if request.method == 'POST':
         u_form = UserUpdateForm(request.POST, instance=request.user)
@@ -289,7 +292,7 @@ def edit_profile(request):
     }
     return render(request, 'editprofile.html', context)
 
-
+@login_required(login_url="/login/")
 def runcode(request):
     return render(request, 'compiler.html')
 
@@ -347,7 +350,7 @@ def homepage(request):
 
 
 
-
+@login_required(login_url="/login/")
 def article_list(request, slug):
     # posts = None
     # if slug is not None:
@@ -367,7 +370,7 @@ def article_list(request, slug):
         }
     return render(request, 'chapter.html', context)
 
-
+@login_required(login_url="/login/")
 def search_venues(request):
     if request.method == 'POST':
         searched = request.POST['searched']
@@ -389,7 +392,7 @@ def search_venues(request):
 
 
 
-
+@login_required(login_url="/login/")
 def topics(request):
     topics = Article.objects.all()
     context = {'topics': topics}
@@ -407,6 +410,7 @@ def post_detail(request, slug):
 
     return render(request, "lesson.html", context)
 
+@login_required(login_url="/login/")
 def exam (request):
 
     return render(request, "exam.html")

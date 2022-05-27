@@ -39,16 +39,25 @@
         width: 200px;
         height: 120px;
         margin-left: 2rem;
+        display: block;
+    margin: 0 auto;
     }
     img{
         border-radius: 50%;
         width: 100%;
         height: auto;
+        width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  margin: 20px;
+
+  object-fit: cover;
+  object-position: center right;
     }
     
     .user-avatar{
-        width: 200px;
-        height: 200px;
+        width: 180px;
+        height: 180px;
     }
    
     #account{
@@ -66,6 +75,7 @@
         padding-top: 30px;
     }
 
+
     @media all and (max-width: 1400px){
         .breadcrumb{
         background-color: white; 
@@ -77,6 +87,8 @@
         .user-avatar{
         width: 150px;
         height: 150px;
+        display: block;
+    margin: 0 auto;
     }
     .about h5{
         font-size: 16px;
@@ -96,6 +108,8 @@
         .user-avatar{
         width: 120px;
         height: 120px;
+        display: block;
+    margin: 0 auto;
     }
     .user-name{
         margin-top: -1rem;
@@ -113,7 +127,7 @@
         text-align: center;
         
     }
-    .user-avatar{
+    img{
         width: 120px;
         height: 120px;
         display: block;
@@ -137,14 +151,15 @@
         width: 100px;
         height: 100px;
         margin-left: 2rem;
+        
     }
     
     .user-name{   
-        margin-top: -1rem;
+        margin-top: 1rem;
         font-size: 18px;
     }
     .about{
-        margin-top: -8rem;
+        margin-top: -5rem;
     }
     .about h5{
         font-size: 16px;
@@ -181,7 +196,7 @@
             <div class="account-settings">
                 <div class="user-profile">
                     <div class="user-avatar">
-                        <img src="{{user.profile.photo.url}}" id="pfp" alt="profilephoto" >
+                        <img src="{{user.profile.photo.url}}"  id="pfp" alt="profilephoto" class="rounded-circle">
                     </div>
                     <h5 class="user-name">Тіркелгі аты: {{ user.username }}</h5>
                     <h6 class="user-email">Эл.пошта: {{ user.email }}</h6>
