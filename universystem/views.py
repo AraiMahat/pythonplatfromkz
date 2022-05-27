@@ -119,7 +119,7 @@ def loginView(request):
             return redirect('/login')
 
         login(request, user)
-        return redirect('/')
+        return redirect('/topics')
 
 
 
