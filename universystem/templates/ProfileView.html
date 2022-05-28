@@ -202,7 +202,7 @@
                     <h6 class="user-email">Эл.пошта: {{ user.email }}</h6>
                 </div>
                 <div class="about" >
-                    <h5>Регистрация күні:</h5>
+                    <h5>Тіркелу күні:</h5>
                     <p>{{user.date_joined}}</p>
                 </div>
                 <a href="{% url 'universystem:edit_profile' %}" class="btn btn-primary" id="account">Аккаунт баптаулары</a>
@@ -234,6 +234,10 @@
                         <li>{{r.quiz.name }}: {{r.score}} %</li>
                     
                     {% endfor %}</ol>
+                    <a class="btn btn-primary" style=" float: right; padding: 0.5rem 2.5rem; color:white; text-decoration: none; background-color: #7971ea; border-radius:50px;border: none; margin-right: 2rem; position: absolute;
+                    right:    0;
+                    bottom:   0; " href="{% url 'universystem:main-quiz' %}">Тестке көшу</a>
+
                 </div>
                 
             </div>

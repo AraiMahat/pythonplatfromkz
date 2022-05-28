@@ -6,7 +6,7 @@
 {% block content %}
 
 <div class="container">
-    <ol class="breadcrumb" style="background-color: white; font-size: 18px; margin-top: 4rem;">
+    <ol class="breadcrumb" >
         <li class="breadcrumb-item active" aria-current="page"><a href="{% url 'universystem:topics' %}" >Курс</a></li>
        <li class="breadcrumb-item"><a href="{% url 'universystem:runcode' %}">Компилятор</a></li>
    
@@ -38,6 +38,17 @@ color: black;
 a:active {
 color: #7971ea;
 }
-
+.breadcrumb{
+    background-color: white; font-size: 18px; margin-top: 4rem;
+}
+@media all and (max-width: 500px){
+    .breadcrumb{
+ font-size: 14px; margin-top: 1.5rem;
+}
+}
+iframe{
+        margin-top: 0.5rem;
+        margin-bottom: 0.5rem;
+    }
 </style>
 {% endblock %}  

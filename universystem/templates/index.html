@@ -107,9 +107,15 @@
                     {% endif %}
                     <input type="submit"   class="w-100 btn btn-primary btn-block" style="background-color: #7971ea; border: none;" value="Кіру">
                     <div class="form-group mt-3"> <a href="{% url 'universystem:register' %}" class="register"><span>Тіркелу</span></a>
-                    </div>
+                    </div>{% if messages %}
+                  {% for message in messages %}   
+                  <div class="alert alert-info">
+                      {{message}}
+                  </div>
+                  {% endfor %}
+                  {% endif %}
                   </form>
-                   
+                  
 
                 </div>
                 
