@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 
 import os
 
+from django import conf
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -21,13 +23,11 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '!pxaor%gc8e96py^og((3lza_0r9wx(#_h*zlmad&jaee4v8-2'
+import dj_database_url
+from decouple import config
+from dotenv import load_dotenv, find_dotenv
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
 
-ALLOWED_HOSTS = ['*']
 
 LOGIN_REDIRECT_URL = '/topics'
 LOGIN_URL = '/login'
@@ -47,6 +47,8 @@ INSTALLED_APPS = [
     'universystem',
     'ckeditor',
     'ckeditor_uploader',
+    'django_extensions',
+    'storages'
 
 ]
 
@@ -87,11 +89,14 @@ WSGI_APPLICATION = 'platforma.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
+load_dotenv(find_dotenv())
+
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
+        
+    'default':  dj_database_url.config(default='sqlite:///db.sqlite3', conn_max_age=600)
+        # 'ENGINE': 'django.db.backends.sqlite3',
+        # 'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+  
 }
 
 
@@ -128,17 +133,23 @@ USE_L10N = True
 USE_TZ = True
 
 
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles') 
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'static'),
-)
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media') 
+
+# STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles') 
+
+# MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+
+# STATICFILES_DIRS = (
+#     os.path.join(BASE_DIR, 'static'),
+# )
 
 DEFAULT_AUTO_FIELD='django.db.models.AutoField' 
 
@@ -146,10 +157,20 @@ import dj_database_url
 db_from_env = dj_database_url.config()
 DATABASES['default'].update(db_from_env)
 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'pythonplatformkz@gmail.com'
-EMAIL_HOST_PASSWORD = 'platformadmin123'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-EMAIL_USE_SSL = False
+
+# DEFAULT_FILE_STORAGE = 'storage.backends.s3boto3.S3Boto#Storage'
+
+
+
+# '''
+# <?xml version="1.0" encoding="UTF-8"?>
+# <CORSConfiguration xmlns="http://s3.amazonaws.com/doc/2006-03-01/">
+# <CORSRule>
+#     <AllowedOrigin>*</AllowedOrigin>
+#     <AllowedMethod>GET</AllowedMethod>
+#     <AllowedMethod>POST</AllowedMethod>
+#     <AllowedMethod>PUT</AllowedMethod>
+#     <AllowedHeader>*</AllowedHeader>
+# </CORSRule>
+# </CORSConfiguration>
+# '''
