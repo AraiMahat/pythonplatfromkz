@@ -173,7 +173,7 @@ DATABASES['default'].update(db_from_env)
 
 AWS_ACCESS_KEY_ID = 'AKIA6RP6SAPEC24SVVKK'
 AWS_SECRET_ACCESS_KEY = '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'
-AWS_STORAGE_BUCKET_NAME = 'pythonkz'
+AWS_STORAGE_BUCKET_NAME = 'pythonplatformkz'
 
 AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
 AWS_S3_FILE_OVERWRITE = False
@@ -181,7 +181,7 @@ AWS_DEFAULT_ACL = 'public-read'
 
 
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-STATICFILES_STORAGE = 'storages.backends.s3boto3.S3StaticStorage'
+STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
 AWS_S3_OBJECT_PARAMETERS = {
     'CachControl': 'max-age=86400',
