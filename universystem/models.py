@@ -36,10 +36,10 @@ class Quiz(models.Model):
 class Question(models.Model):
     text = models.CharField(max_length=200)
     quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE)
-    
+
     def __str__(self):
         return str(self.text)
-    
+
     def get_answers(self):
         return self.answer_set.all()
 
@@ -78,21 +78,21 @@ def user_directory_path(instance, filename):
         os.remove(full_path)
 
     return profile_pic_name
-       
+
 class Profile(models.Model):
     photo = models.ImageField(default='images/profile/pfp.png', upload_to='images/profile', null=True)
     user = models.OneToOneField(User, on_delete=models.CASCADE, null=True ,blank=True)
     auth_token = models.CharField(max_length=100)
     is_verified = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
-    
+
     def __str__(self):
         return self.user.username
-    
+
     class Meta:
         verbose_name = 'Профили'
         verbose_name_plural = 'Профили'
-    
+
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
 
@@ -127,7 +127,8 @@ class Lectures_text(models.Model):
     lectures_id = models.ForeignKey(Lectures, on_delete=models.CASCADE, null=True)
     title = models.CharField(max_length=200)
     text = models.TextField(null=True ,blank=True)
-    photo = models.ImageField(upload_to='images/lesson', blank=True)
+    photo = models.URLField(max_length=200)
+    # photo = models.ImageField(upload_to='images/lesson', blank=True)
     lectures_cod = models.TextField(null=True ,blank=True)
     def __str__(self):
         return self.title
@@ -152,6 +153,7 @@ class Article(models.Model):
     article_id = models.ForeignKey(Lectures, on_delete=models.CASCADE, null=True)
     title = models.CharField(max_length=200)
     image = models.ImageField(upload_to='img')
+    photo = models.URLField(max_length=200)
     slug = models.SlugField(max_length=255, unique=True, db_index=True, verbose_name="URL")
     topic1 = models.TextField(blank=True)
     topic2 = models.TextField(blank=True)
@@ -165,7 +167,7 @@ class Article(models.Model):
         return self.title
 
 
-    
+
     def get_absolute_url(self):
         return reverse('article', kwargs={'slug': self.slug})
 

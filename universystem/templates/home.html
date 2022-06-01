@@ -127,7 +127,7 @@ text-decoration: none;
                     {% for topic in topics %}
                     <div class="item mb-4">
                         <div class="card border-0 shadow" id="card">
-                            <a href="/article/{{topic.slug}}"><img src="{{topic.image.url}}" alt="" class="card-img-top"></a>
+                            <a href="/article/{{topic.slug}}"><img src="{{topic.photo}}" alt="" class="card-img-top"></a>
                             <div class="card-body">
                                 <div style="margin-left: 2rem;">
                                     <h4 class="card-title text-center" id="article_id" ><a href="/article/{{topic.slug}}" id="article">{{topic.article_id}}</a></h4>
