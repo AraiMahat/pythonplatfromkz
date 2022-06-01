@@ -18,6 +18,9 @@ from decouple import config
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+# STATICFILES_DIRS = (
+#     os.path.join(BASE_DIR, 'static'),
+# )
 
 SECRET_KEY = '%20!5gxdyuu!mxtk^#d2olcvt(^h3q1&u8_fgh4%n!%a5f&@ih'
 
@@ -150,19 +153,21 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
-# STATIC_URL = '/static/'
+
 # STATIC_ROOT = os.path.join(BASE_DIR, 'static') 
 
-# MEDIA_URL = '/media/'
+
 # MEDIA_ROOT = os.path.join(BASE_DIR, 'media') 
 
 # STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles') 
 
 # MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
-# STATICFILES_DIRS = (
-#     os.path.join(BASE_DIR, 'static'),
-# )
+
+
+
+# STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+# STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
 
 DEFAULT_AUTO_FIELD='django.db.models.AutoField' 
 
@@ -175,7 +180,7 @@ AWS_ACCESS_KEY_ID = 'AKIA6RP6SAPEC24SVVKK'
 AWS_SECRET_ACCESS_KEY = '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'
 AWS_STORAGE_BUCKET_NAME = 'pythonplatformkz'
 
-AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
+AWS_S3_CUSTOM_DOMAIN = 'pythonplatformkz.s3.amazonaws.com'
 AWS_S3_FILE_OVERWRITE = False
 AWS_DEFAULT_ACL = 'public-read'
 
@@ -192,11 +197,14 @@ AWS_HEADERS = {
     'Access-Control-Allow-Origin': '*'
 }
 
-
-STATIC_URL = f'http://{AWS_S3_CUSTOM_DOMAIN}/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static/') 
-MEDIA_URL = f'http://{AWS_S3_CUSTOM_DOMAIN}/media/'
+# STATIC_URL = '/static/'
+# MEDIA_URL = '/media/'
+STATIC_URL = 'http://pythonplatformkz.s3.amazonaws.com/static/'
+MEDIA_URL = 'http://pythonplatformkz.s3.amazonaws.com/media/'
+STATIC_ROOT = '/static/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
+
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
