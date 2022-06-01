@@ -80,7 +80,7 @@ def user_directory_path(instance, filename):
     return profile_pic_name
 
 class Profile(models.Model):
-    photo = models.ImageField(default='images/profile/pfp.png', upload_to='images/profile', null=True)
+    photo = models.ImageField( upload_to='images/profile', null=True)
     user = models.OneToOneField(User, on_delete=models.CASCADE, null=True ,blank=True)
     auth_token = models.CharField(max_length=100)
     is_verified = models.BooleanField(default=False)
