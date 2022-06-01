@@ -196,7 +196,9 @@
             <div class="account-settings">
                 <div class="user-profile">
                     <div class="user-avatar">
-                        <img src="{{user.profile.photo.url}}"  id="pfp" alt="profilephoto" class="rounded-circle">
+                        
+                         <img src="{% if user.profile.photo %}{{user.profile.photo.url}}{% else %}{% static 'static/img/img_7_7.jpg' %}{% endif %}"  id="pfp" alt="profilephoto" class="rounded-circle">
+
                     </div>
                     <h5 class="user-name">Тіркелгі аты: {{ user.username }}</h5>
                     <h6 class="user-email">Эл.пошта: {{ user.email }}</h6>
