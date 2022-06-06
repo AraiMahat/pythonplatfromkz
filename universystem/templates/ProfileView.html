@@ -197,7 +197,7 @@
                 <div class="user-profile">
                     <div class="user-avatar">
                         
-                         <img src="{% if user.profile.photo %}{{user.profile.photo.url}}{% else %}{% 'https://pythonplatformkz.s3.us-west-2.amazonaws.com/media/images/profile/pfp.png' %}{% endif %}"  id="pfp" alt="profilephoto" class="rounded-circle">
+                         <img src="{% if user.profile.photo %}{{user.profile.photo.url}}{% else %}{% static 'static/img/pfp.png' %}{% endif %}"  id="pfp" alt="profilephoto" class="rounded-circle">
 
                     </div>
                     <h5 class="user-name">Тіркелгі аты: {{ user.username }}</h5>
