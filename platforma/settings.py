@@ -176,13 +176,6 @@ db_from_env = dj_database_url.config()
 DATABASES['default'].update(db_from_env)
 
 
-AWS_ACCESS_KEY_ID = 'AKIA6RP6SAPEC24SVVKK'
-AWS_SECRET_ACCESS_KEY = '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'
-AWS_STORAGE_BUCKET_NAME = 'pythonplatformkz'
-
-AWS_S3_CUSTOM_DOMAIN = 'pythonplatformkz.s3.amazonaws.com'
-AWS_S3_FILE_OVERWRITE = False
-AWS_DEFAULT_ACL = 'public-read'
 
 # MEDIAFILES_LOCATION = 'media'
 # DEFAULT_FILE_STORAGE = 'Management.storage_backends.MediaStorage'
@@ -206,11 +199,3 @@ STATIC_ROOT = '/static/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
 
-
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'pythonplatformkz@gmail.com'
-EMAIL_HOST_PASSWORD = 'platformadmin123'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-EMAIL_USE_SSL = False
