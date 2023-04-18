@@ -1,0 +1,113 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<center>
+    {% if searched %}
+
+    <div class="container" id="card">
+    <div class="card">
+        <div class="card-header">
+        <h3 style="text-align: center;">«{{ searched }}» деген бетті бастау  (осы атаудан басталатын беттер | осы атауға сілтейтін беттер)</h3>  
+        </div>
+         {% for article in articles %}
+        <div class="card-body">
+            <a href="/article/{{article.slug}}">{{ article  }}:</a>
+            <!-- <p> {{article.topic1}} <br>{{article.topic2}} <br> 
+                {{article.topic3 }}</p> -->
+        </div>
+        {% endfor %}
+      </div>
+        <br>    
+    </div>
+    
+    <style>
+      a:link {
+     color: black;
+ text-decoration: none;
+   }
+     a:visited {
+     color: black;
+   }
+   
+   /* mouse over link */
+   a:hover {
+     color: black;
+   }
+   
+   /* selected link */
+   a:active {
+     color: #7971ea;
+   }
+   #card{
+     margin-top: 5rem;
+      margin-bottom: 5rem;
+   }
+ 
+   @media all and (max-width: 500px){
+     #card{
+     margin-top: 3rem;
+      margin-bottom: 2rem;
+   }
+   }
+ </style>      
+        <!-- <p>
+            <a href="/article/{{article.slug}}">{{ article  }}</a>
+             <br>  
+        </p> -->
+      
+        
+    {% else %}
+    <div class="container" id="card">
+    <div class="card">
+        <!-- <div class="card-header"> -->
+        <!-- <h3 style="text-align: center;">«{{ searched }}» деген бетті бастау  (осы атаудан басталатын беттер | осы атауға сілтейтін беттер)</h3>   -->
+        <!-- </div> -->
+         
+        <div class="card-body">
+            Сұрауға сәйкес нәтижелер табылмады.
+        </div>
+       
+      </div>
+        <br>    
+    </div>
+    <style>
+      a:link {
+     color: black;
+ text-decoration: none;
+   }
+     a:visited {
+     color: black;
+   }
+   
+   /* mouse over link */
+   a:hover {
+     color: black;
+   }
+   
+   /* selected link */
+   a:active {
+     color: #7971ea;
+   }
+   #card{
+     margin-top: 5rem;
+      margin-bottom: 5rem;
+   }
+ 
+   @media all and (max-width: 500px){
+     #card{
+     margin-top: 3rem;
+      margin-bottom: 2rem;
+   }
+   }
+ </style>
+    {% endif %}
+    
+</center>
+
+{% endblock %}  
+
+
+
+
+

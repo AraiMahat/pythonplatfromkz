@@ -1,0 +1,92 @@
+{% extends 'registration/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="authincation h-100" style="background-color: #7971ea;">
+    <div class="container h-100">
+        <div class="row justify-content-center h-100 align-items-center">
+            <div class="col-md-6">
+                <div class="authincation-content" >
+                    <div class="row no-gutters">
+                        <div class="col-xl-12">
+                            <div class="auth-form">
+                                <div class="card">
+                                    <div class="card-body" style="margin: 40px 30px;">
+                                        <h1>Электронды поштаңызға тексеру хаты жіберілді. Поштаға кіріп логинді растауыңызды сұраймыз!</h1>
+                                        
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> 
+
+<style>
+    label{
+        padding: 10px 0;
+    }
+
+    a:link {
+  color: black  ;
+  background-color: transparent;
+  text-decoration: none;
+  text-decoration: underline;
+}
+a:visited {
+  color: black;
+  background-color: transparent;
+  text-decoration: none;
+}
+a:hover {
+    font-weight: bold;
+  background-color: transparent;
+  text-decoration: underline;
+}
+a:active {
+  color: red;
+  background-color: transparent;
+  text-decoration: underline;
+}
+h1{
+    text-align: center;
+}
+.card{
+    max-width: 40rem; 
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, 
+    rgba(0, 0, 0, 0.12) 0px -12px 30px, 
+    rgba(0, 0, 0, 0.12) 0px 4px 6px, 
+    rgba(0, 0, 0, 0.17) 0px 12px 13px,
+     rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+
+@media all and (max-width: 1200px){
+
+.card{
+
+    width:600px;
+    margin: auto;
+}
+
+}
+@media all and (max-width: 950px){
+
+    .card{
+
+        width:500px;
+        margin: auto;
+    }
+    
+}
+
+@media all and (max-width: 500px){
+    .card{
+        width: 390px;
+    }
+}
+</style>
+{% endblock %}

@@ -1,0 +1,264 @@
+{% extends 'base.html' %}
+
+
+{% load static %}
+
+<link rel="stylesheet" href="{% static 'assets/css/Account-setting-or-edit-profile.css' %}">
+{% block content %}
+ {% if user.is_authenticated %}
+ <style>
+    a:link {
+    color: #7971ea;
+    text-decoration: none;
+    }
+    
+    /* visited link */
+    a:visited {
+    color: #7971ea;
+    }
+    
+    /* mouse over link */
+    a:hover {
+    color: black;
+    }
+    
+    /* selected link */
+    a:active {
+    color: black;
+    }
+    a.course{
+    color: #7971ea;
+    }
+    .btn.btn-primary{
+        color: white;
+        background-color: #7971ea;
+    }
+    .user-avatar{
+        margin-top: 1rem;
+        border-radius: 50%;
+        width: 200px;
+        height: 120px;
+        margin-left: 2rem;
+        display: block;
+    margin: 0 auto;
+    }
+    img{
+        border-radius: 50%;
+        width: 100%;
+        height: auto;
+        width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  margin: 20px;
+
+  object-fit: cover;
+  object-position: center right;
+    }
+    
+    .user-avatar{
+        width: 180px;
+        height: 180px;
+    }
+   
+    #account{
+        border-radius: 50px;
+        border: none; 
+        padding: 10px;
+    }
+    .breadcrumb{
+        background-color: white; 
+        font-size: 18px; 
+        margin-top: 4rem;
+
+    }
+    .user-name{
+        padding-top: 30px;
+    }
+
+
+    @media all and (max-width: 1400px){
+        .breadcrumb{
+        background-color: white; 
+        font-size: 16px; 
+        margin-top: 2rem;
+        margin-bottom: -0.5rem;
+        
+        }
+        .user-avatar{
+        width: 150px;
+        height: 150px;
+        display: block;
+    margin: 0 auto;
+    }
+    .about h5{
+        font-size: 16px;
+    }
+    .about p{
+        font-size: 14px;
+    }
+    }
+    @media all and (max-width: 1200px){
+        .breadcrumb{
+        background-color: white; 
+        font-size: 16px; 
+        margin-top: 2rem;
+        margin-bottom: -0.5rem;
+        
+        }
+        .user-avatar{
+        width: 120px;
+        height: 120px;
+        display: block;
+    margin: 0 auto;
+    }
+    .user-name{
+        margin-top: -1rem;
+        font-size: 16px;
+    }
+    .about h5{
+        font-size: 16px;
+    }
+    .about p{
+        font-size: 14px;
+    }
+    }
+    @media all and (max-width: 995px){
+        .account-settings{
+        text-align: center;
+        
+    }
+    img{
+        width: 120px;
+        height: 120px;
+        display: block;
+    margin: 0 auto;
+    }
+    }
+
+
+    @media all and (max-width: 500px){
+        .breadcrumb{
+        background-color: white; 
+        font-size: 14px; 
+        margin-top: 1.5rem;
+        margin-bottom: -0.5rem;
+    }
+    .user-profile{
+        width: 300px;
+        height: 300px;
+    }
+    .user-avatar{
+        width: 100px;
+        height: 100px;
+        margin-left: 2rem;
+        
+    }
+    
+    .user-name{   
+        margin-top: 1rem;
+        font-size: 18px;
+    }
+    .about{
+        margin-top: -5rem;
+    }
+    .about h5{
+        font-size: 16px;
+    }
+    .about p{
+        font-size: 14px;
+    }
+    #account{
+        border-radius: 50px;
+        border: none; 
+        font-size: 14px;
+        padding: 10px;
+    }
+    .account-settings{
+        margin-left: 3.8rem;
+        text-align: justify;
+    }
+    }
+    </style>
+ <div class="container">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item active" aria-current="page"><a href="{% url 'universystem:topics' %}" >Курс</a></li>
+       <li class="breadcrumb-item"><a href="{% url 'universystem:profile' %}" >Жеке кабинет</a></li>
+   
+   </ol>
+
+   
+<div class="container py-4 py-xl-5" id="section-1"><div class="container">
+
+    <div class="row gutters">
+    <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
+    <div class="card h-100">
+        <div class="card-body">
+            <div class="account-settings">
+                <div class="user-profile">
+                    <div class="user-avatar">
+                       
+
+{#                         <img src="{% if user.profile.photo %}{{user.profile.photo.url}}{% else %}{% static 'media/images/profile/pfp.png' %}{% endif %}"  id="pfp" alt="profilephoto" class="rounded-circle">#}
+
+                    </div>
+                    <h5 class="user-name">Тіркелгі аты: {{ user.username }}</h5>
+                    <h6 class="user-email">Эл.пошта: {{ user.email }}</h6>
+                </div>
+                <div class="about" >
+                    <h5>Тіркелу күні:</h5>
+                    <p>{{user.date_joined}}</p>
+                </div>
+                <a href="{% url 'universystem:edit_profile' %}" class="btn btn-primary" id="account">Аккаунт баптаулары</a>
+                {% if messages %}
+                {% for message in messages %}   
+                <div class="alert alert-info">
+                    {{message}}
+                </div>
+                {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    </div>
+    <div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12">
+    <div class="card h-100">
+        <div class="card-body">
+            <div class="row gutters">
+                <!-- <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                    <h6 class="mb-2 text-primary" style="color: #7971ea;">Қаралған тақырыптар: </h6>
+                </div> -->
+               
+            </div>
+            <div class="row gutters">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                    <h5 class="mt-3 mb-2" style="color: #7971ea;">Тест нәтижелері:</h5>
+                   <ol> {% for r in result %}
+                    
+                        <li>{{r.quiz.name }}: {{r.score}} %</li>
+                    
+                    {% endfor %}</ol>
+                    <a class="btn btn-primary" style=" float: right; padding: 0.5rem 2.5rem; color:white; text-decoration: none; background-color: #7971ea; border-radius:50px;border: none; margin-right: 2rem; position: absolute;
+                    right:    0;
+                    bottom:   0; " href="{% url 'universystem:main-quiz' %}">Тестке көшу</a>
+
+                </div>
+                
+            </div>
+            <div class="row gutters">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                    <div class="text-right">
+                        <!-- <button type="button" id="submit" name="submit" class="btn btn-secondary">Cancel</button> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+ {% else %}
+  <p>login to view</p>
+
+  {% endif %}
+
+{% endblock %}  
+
+

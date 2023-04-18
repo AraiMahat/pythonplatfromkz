@@ -1,0 +1,306 @@
+{% extends 'base.html' %}
+
+
+{% load static %}
+
+
+
+
+{% block content %}
+<div id="mySidenav" class="sidenav">
+<!--   
+  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+    Запустить модальное окно </button> -->
+    <a href="#" id="compiler" data-toggle="modal" data-target="#exampleModalCenter">Компилятор</a>
+ 
+  
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" >
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document" > <!-- !!!!!!!! -->
+      <div class="modal-content" >
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Компилятор</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-dialog modal-lg" >
+          <div class="modal-content" style="width: 700px;">
+            <iframe src="https://trinket.io/embed/python/0564e18108" width="100%" height="356" frameborder="0" marginwidth="0" marginheight="0" allowfullscreen></iframe>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Жабу</button>
+          <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="container py-4 py-xl-5">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{% url 'universystem:topics' %}"><span>Курс</span></a></li>
+        <li class="breadcrumb-item"><a href="#"><span>{{article.title}}</span></a></li>
+        <!-- <li class="breadcrumb-item"><a href="#"><span>Data</span></a></li> -->
+    </ol>
+
+
+    <div class="row mb-5">
+      <div class="col-md-8 col-xl-6 text-center mx-auto">
+          <h2 class="font-weight-bold"><a href="#"><span style="text-decoration: underline;">{{article.title}}</span></a><br></h2>
+          <!-- <p class="w-lg-50">Curae hendrerit donec commodo hendrerit egestas tempus, turpis facilisis nostra nunc. Vestibulum dui eget ultrices.</p> -->
+      </div>
+  </div>
+
+
+    <div class="card">
+      <div class="card-header">
+          <ul class="nav nav-tabs card-header-tabs" id="lesson-list" >
+              <li class="nav-item"><a class="nav-link active" href="#topic1" role="tab" data-toggle="tab"><span style="text-decoration: none;">{{ article.topic1 }}</span></a></li>
+              <li class="nav-item"><a class="nav-link" href="#topic2" role="tab" data-toggle="tab">{{ article.topic2 }}</a></li>
+              <li class="nav-item"><a class="nav-link" href="#topic3" role="tab" data-toggle="tab">{{ article.topic3 }}</a></li>
+              <li class="nav-item"><a class="nav-link" href="#quiz" role="tab" data-toggle="tab">Тест</a></li>
+
+          </ul>
+      </div>
+      <div class="tab-content">
+        <div role="tabpanel"class="tab-pane active" id="topic1">
+          <div class="card-body">
+            <div class="container-fluid">
+              <h3 class="card-title">{{ article.topic1 }}</h3>
+              <p id="content">{{ article.body1|safe}} </p>
+            </div>
+          </div>
+        </div>
+        <div role="tabpanel"class="tab-pane" id="topic2">
+          <div class="card-body">
+            <div class="container-fluid">
+              <h3 class="card-title">{{ article.topic2 }}</h3>
+              <p id="content">{{ article.body2|safe}} </p>
+            </div>
+        </div>
+        </div>
+        <div role="tabpanel"class="tab-pane" id="topic3">
+          <div class="card-body">
+            <div class="container-fluid">
+              <h3 class="card-title">{{ article.topic3 }}</h3>
+              <p id="content">{{ article.body3|safe}} </p>
+            </div>
+          </div> 
+        </div>
+        <div role="tabpanel"class="tab-pane" id="quiz">
+          <div class="card-body">
+            <div class="container-fluid" style="margin-bottom: 2rem;">
+              <h3 class="card-title"><a href="{% url 'universystem:main-quiz' %}">Тақырып бойынша тестке өту</a></h3>
+
+              
+
+            </div>
+          </div> 
+        </div>
+      </div>
+
+
+
+<!-------------------------------------------------- МОДЕЛ Python тілінің мәліметтер типтері мен құрылымы ----------------------------------------------->
+
+<!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+  Launch demo modal
+</button> -->
+
+      <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document" >
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLongTitle">Мысал</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <iframe src="https://trinket.io/embed/python/a18a336053" width="100%" height="356" frameborder="0" marginwidth="0" marginheight="0" allowfullscreen></iframe>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Жабу</button>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document" >
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLongTitle">Мысал</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <iframe src="https://trinket.io/embed/python/a18a336053" width="100%" height="356" frameborder="0" marginwidth="0" marginheight="0" allowfullscreen></iframe>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Жабу</button>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+
+     
+
+    </div>
+    
+</div>
+
+
+<style>
+.card{
+  -webkit-box-shadow: 0px 5px 10px 2px rgba(121, 113, 234, 0.2);
+-moz-box-shadow: 0px 5px 10px 2px rgba(121, 113, 234, 0.2);
+box-shadow: 0px 5px 10px 2px rgba(121, 113, 234, 0.2);}
+.card-title{
+  text-align: center;
+  padding-top: 30px;
+}
+
+
+#content{
+  margin: 30px 30px;
+}
+ /* unvisited link */
+ a:link {
+    color: black;
+text-decoration: none;
+  }
+  
+  /* visited link */
+  a:visited {
+    color: #7971ea;
+  }
+  
+  /* mouse over link */
+  a:hover {
+    color: black;
+  }
+  
+  /* selected link */
+  a:active {
+    color: #7971ea;
+  }
+  .fit-cover {
+    object-fit: cover;
+  }
+  
+  h1, h2 {
+    text-align: center;
+  }
+  
+  #prev {
+    background-color: #7971ea;
+    border-radius: 50px;
+    border: none;
+    padding: 8px 25px;
+  }
+  
+  #next {
+    background-color: #7971ea;
+    border-radius: 50px;
+    border: none;
+    padding: 8px 25px;
+    float: right;
+  }
+  .breadcrumb{
+    background-color: white; font-size: 18px; color: #7971ea;
+  }
+  #content {
+    margin: 50px;
+  }
+  #mySidenav a {
+  position: absolute;
+  right: -30px;
+  transition: 0.3s;
+  padding: 15px;
+  width: 180px;
+  text-decoration: none;
+  font-size: 20px;
+  color: white;
+  border-radius: 5px  0  0 5px ;
+}
+
+#mySidenav a:hover {
+  right: 0;
+}
+
+#compiler {
+  top: 200px;
+  background-color: #7971ea;
+}
+
+
+  #code {
+    margin: 30px;
+  }
+
+  @media all and (max-width: 767px){
+    #mySidenav a {
+  position: absolute;
+  right: -40px;
+  transition: 0.3s;
+  padding: 15px;
+  width: 165px;
+  text-decoration: none;
+  font-size: 16px;
+  color: white;
+  border-radius: 5px  0  0 5px ;
+}
+  }
+
+  @media all and (max-width: 695px){
+    #mySidenav a {
+  position: absolute;
+  right: -40px;
+  transition: 0.3s;
+  padding: 10px;
+  width: 140px;
+  text-decoration: none;
+  font-size: 14px;
+  color: white;
+  border-radius: 5px  0  0 5px ;
+}
+#compiler {
+  top: 180px;
+  background-color: #7971ea;
+}
+  }
+
+  @media all and (max-width: 500px){
+    .breadcrumb{
+      margin-top: -0.5rem;
+    font-size: 12px; 
+  }
+  .font-weight-bold{
+    font-size: 18px;
+    text-align: center;
+  }
+  }
+  .card{
+    margin-top: -2rem;
+  }
+  .nav-item{
+    font-size: 14px;
+  }
+  .card-title{
+    margin:-1rem 0;
+    font-size: 18px;
+  }
+  
+  #compiler {
+  top: 180px;
+  background-color: #7971ea;
+}
+  </style>
+{% endblock %}  

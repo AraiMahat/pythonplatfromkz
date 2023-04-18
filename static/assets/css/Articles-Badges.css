@@ -1,0 +1,31 @@
+.fit-cover {
+  object-fit: cover;
+}
+
+h1 {
+  text-align: center;
+}
+
+#prev {
+  background-color: #7971ea;
+  border-radius: 50px;
+  border: none;
+  padding: 8px 25px;
+}
+
+#next {
+  background-color: #7971ea;
+  border-radius: 50px;
+  border: none;
+  padding: 8px 25px;
+  float: right;
+}
+
+#content {
+  margin: 50px;
+}
+
+#code {
+  margin: 30px;
+}
+

@@ -1,0 +1,37 @@
+.bs-icon-sm.bs-icon-rounded.bs-icon-primary.bs-icon {
+  background-color: #7971ea;
+}
+
+#searchbar {
+  margin: 10px;
+  padding: 5px;
+  border-radius: 50px;
+  border-color: #7971ea;
+}
+
+#search {
+  background-color: #7971ea;
+  border-radius: 50px;
+  border-color: #7971ea;
+}
+
+.breadcrumb {
+  margin: 20px 40px;
+}
+
+a.breadcrumb-item {
+  color: black;
+}
+
+.navbar {
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+}
+
+#page {
+  justify-content: center;
+}
+
+.card-title {
+  font-style: normal;
+}
+
