@@ -179,22 +179,22 @@ DATABASES['default'].update(db_from_env)
 
 # MEDIAFILES_LOCATION = 'media'
 # DEFAULT_FILE_STORAGE = 'Management.storage_backends.MediaStorage'
-DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+# DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+# STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
-AWS_S3_OBJECT_PARAMETERS = {
-    'CacheControl': 'max-age=86400',
-}
-AWS_LOCATION = 'static'
-AWS_QUERYSTRING_AUTH = False
-AWS_HEADERS = {
-    'Access-Control-Allow-Origin': '*'
-}
+# AWS_S3_OBJECT_PARAMETERS = {
+#     'CacheControl': 'max-age=86400',
+# }
+# AWS_LOCATION = 'static'
+# AWS_QUERYSTRING_AUTH = False
+# AWS_HEADERS = {
+#     'Access-Control-Allow-Origin': '*'
+# }
 
-# STATIC_URL = '/static/'
-# MEDIA_URL = '/media/'
-STATIC_URL = 'http://pythonplatformkz.s3.amazonaws.com/static/'
-MEDIA_URL = 'http://pythonplatformkz.s3.amazonaws.com/media/'
+STATIC_URL = '/static/'
+MEDIA_URL = '/media/'
+# STATIC_URL = 'http://pythonplatformkz.s3.amazonaws.com/static/'
+# MEDIA_URL = 'http://pythonplatformkz.s3.amazonaws.com/media/'
 STATIC_ROOT = '/static/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
