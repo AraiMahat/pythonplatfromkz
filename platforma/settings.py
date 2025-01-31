@@ -27,7 +27,7 @@ SECRET_KEY = '%20!5gxdyuu!mxtk^#d2olcvt(^h3q1&u8_fgh4%n!%a5f&@ih'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['.vercel.app']
 # STATICFILES_DIRS = [
 #     os.path.join(BASE_DIR, "static"),
 # ]
